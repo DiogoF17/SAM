@@ -5,6 +5,7 @@ import 'pages/playCategories.dart';
 import 'pages/learnCategories.dart';
 import 'pages/credits.dart';
 import 'pages/playSpecificCategory.dart';
+import 'pages/learnSpecificCategory.dart';
 
 void main() {
   runApp(const LittleLearner());
@@ -25,6 +26,7 @@ class LittleLearner extends StatelessWidget {
         // home: const PlayCategoriesPage());
         // home: const LearnCategoriesPage());
         // home: const CreditsPage());
-        home: Scaffold(body: const PlaySpecificCategoryPage()));
+        // home: const Scaffold(body: PlaySpecificCategoryPage()));
+        home: const Scaffold(body: LearnSpecificCategoryPage()));
   }
 }

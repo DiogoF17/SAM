@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 
 import "../utils/utils.dart";
 
-class PlaySpecificCategoryPage extends StatefulWidget {
-  const PlaySpecificCategoryPage({Key? key}) : super(key: key);
+class LearnSpecificCategoryPage extends StatefulWidget {
+  const LearnSpecificCategoryPage({Key? key}) : super(key: key);
 
   @override
-  State<PlaySpecificCategoryPage> createState() =>
-      _PlaySpecificCategoryPageState();
+  State<LearnSpecificCategoryPage> createState() =>
+      _LearnSpecificCategoryPageState();
 }
 
-class _PlaySpecificCategoryPageState extends State<PlaySpecificCategoryPage> {
+class _LearnSpecificCategoryPageState extends State<LearnSpecificCategoryPage> {
   @override
   Widget build(BuildContext context) {
     String categoryName = "Nomes de Animais";
@@ -40,13 +40,12 @@ class _PlaySpecificCategoryPageState extends State<PlaySpecificCategoryPage> {
                       "Jogar - Categoria: " + categoryName,
                       alignment: TextAlign.center)),
               // --------------
-              // images/videos section
-              Expanded(
-                  child: GridView.count(
-                      crossAxisCount: 2,
-                      mainAxisSpacing: 15,
-                      crossAxisSpacing: 15,
-                      children: displayImages())),
+              // image/video section
+              const SizedBox(height: 50.0),
+              ClipRRect(
+                  child: Image.asset("images/dogExample.jpeg"),
+                  borderRadius: BorderRadius.circular(10)),
+              const SizedBox(height: 100.0),
               // --------------------
               // button of hear sound
               Container(
@@ -68,17 +67,5 @@ class _PlaySpecificCategoryPageState extends State<PlaySpecificCategoryPage> {
                       ])),
               const SizedBox(height: 20.0)
             ])));
-  }
-
-  List<Widget> displayImages() {
-    List<Widget> ret = [];
-
-    for (int i = 0; i < 4; i++) {
-      ret.add(ClipRRect(
-          child: Image.asset("images/dogExample.jpeg"),
-          borderRadius: BorderRadius.circular(buttonRadius)));
-    }
-
-    return ret;
   }
 }

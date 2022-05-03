@@ -16,23 +16,23 @@ class _PlaySpecificCategoryPageState extends State<PlaySpecificCategoryPage> {
     String categoryName = "Nomes de Animais";
 
     return Container(
-        color: GetAppThemeColor(),
+        color: getAppThemeColor(),
         child: Padding(
-            padding: EdgeInsets.only(left: 10, right: 10),
+            padding: const EdgeInsets.only(left: 10, right: 10),
             child: Column(children: <Widget>[
-              SizedBox(height: 100.0),
+              const SizedBox(height: 100.0),
               Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
-                    GetTitle(),
-                    IconButton(
+                    getTitle(),
+                    const IconButton(
                         icon: Icon(Icons.home, color: Colors.white, size: 35.0),
                         onPressed: null)
                   ]),
-              SizedBox(height: 20.0),
+              const SizedBox(height: 20.0),
               SizedBox(
                   width: MediaQuery.of(context).size.width * 0.8,
-                  child: GetPersonalizedText(
+                  child: getPersonalizedText(
                       "Jogar - Categoria: " + categoryName,
                       alignment: TextAlign.center)),
               Expanded(
@@ -40,36 +40,29 @@ class _PlaySpecificCategoryPageState extends State<PlaySpecificCategoryPage> {
                       crossAxisCount: 2,
                       mainAxisSpacing: 15,
                       crossAxisSpacing: 15,
-                      children: DisplayImages())),
+                      children: displayImages())),
               Container(
                   decoration: BoxDecoration(
-                      color: Color.fromARGB(255, 38, 75, 130),
+                      color: const Color.fromARGB(255, 38, 75, 130),
                       borderRadius: BorderRadius.circular(10)),
-                  padding: EdgeInsets.only(
+                  padding: const EdgeInsets.only(
                       top: 7.5, bottom: 7.5, left: 20, right: 20),
                   child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
-                        GetPersonalizedText("Cão"),
+                        getPersonalizedText("Cão"),
                         Column(children: <Widget>[
-                          IconButton(
+                          const IconButton(
                               icon: Icon(Icons.volume_up, color: Colors.white),
                               onPressed: null),
-                          GetPersonalizedText("Ouvir Novamente", fontSize: 13.0)
+                          getPersonalizedText("Ouvir Novamente", fontSize: 13.0)
                         ])
                       ])),
-              SizedBox(height: 20.0),
-              // Row(
-              //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //     children: <Widget>[
-              //       GetButton("Anterior", 175.0),
-              //       GetButton("Próximo", 175.0)
-              //     ]),
-              // SizedBox(height: 20.0)
+              const SizedBox(height: 20.0)
             ])));
   }
 
-  List<Widget> DisplayImages() {
+  List<Widget> displayImages() {
     List<Widget> ret = [];
 
     for (int i = 0; i < 4; i++) {

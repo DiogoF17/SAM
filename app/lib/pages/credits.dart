@@ -8,22 +8,22 @@ class CreditsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        color: GetAppThemeColor(),
+        color: getAppThemeColor(),
         child: Column(children: <Widget>[
-          SizedBox(height: 100.0),
-          GetTitle(),
-          SizedBox(height: 20.0),
-          GetPersonalizedText("Créditos"),
-          SizedBox(height: 80.0),
-          GetPersonalizedText("Aplicação desenvolvida por:"),
-          SizedBox(height: 30.0),
-          GetPersonalizedText("Diogo Santos"),
-          SizedBox(height: 10.0),
-          GetPersonalizedText("Jéssica Nascimento"),
-          SizedBox(height: 10.0),
-          GetPersonalizedText("Marcelo Reis"),
-          SizedBox(height: 50.0),
-          GetButton("Voltar", 100.0),
+          const SizedBox(height: 100.0),
+          getTitle(),
+          const SizedBox(height: 20.0),
+          getPersonalizedText("Créditos"),
+          const SizedBox(height: 80.0),
+          getPersonalizedText("Aplicação desenvolvida por:"),
+          const SizedBox(height: 30.0),
+          getPersonalizedText("Diogo Santos"),
+          const SizedBox(height: 10.0),
+          getPersonalizedText("Jéssica Nascimento"),
+          const SizedBox(height: 10.0),
+          getPersonalizedText("Marcelo Reis"),
+          const SizedBox(height: 50.0),
+          getButton("Voltar", 100.0),
         ]));
   }
 }

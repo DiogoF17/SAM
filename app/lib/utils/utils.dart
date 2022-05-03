@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-Color? GetAppThemeColor() {
+Color? getAppThemeColor() {
   return Colors.blue[200];
 }
 
-Widget GetTitle() {
-  return Text("Little Learner",
+Widget getTitle() {
+  return const Text("Little Learner",
       textAlign: TextAlign.center,
       style: TextStyle(
           decoration: TextDecoration.none,
@@ -14,11 +14,11 @@ Widget GetTitle() {
           fontSize: 35));
 }
 
-Widget GetButton(String name, double width) {
+Widget getButton(String name, double width) {
   return ElevatedButton(
       child: Text(name,
           textAlign: TextAlign.center,
-          style: TextStyle(
+          style: const TextStyle(
               decoration: TextDecoration.none,
               fontWeight: FontWeight.bold,
               color: Colors.white,
@@ -30,7 +30,7 @@ Widget GetButton(String name, double width) {
               borderRadius: BorderRadius.circular(10.0))));
 }
 
-Widget GetPersonalizedText(String text,
+Widget getPersonalizedText(String text,
     {alignment = TextAlign.left, fontSize = 18.0}) {
   return Text(text,
       textAlign: alignment,

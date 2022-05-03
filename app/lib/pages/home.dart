@@ -8,16 +8,16 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        color: GetAppThemeColor(),
+        color: getAppThemeColor(),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            GetTitle(),
-            SizedBox(height: 40.0),
-            GetButton("Jogar", 150.0),
-            GetButton("Aprender", 150.0),
-            GetButton("Créditos", 150.0),
+            getTitle(),
+            const SizedBox(height: 40.0),
+            getButton("Jogar", 150.0),
+            getButton("Aprender", 150.0),
+            getButton("Créditos", 150.0),
           ],
         ));
   }

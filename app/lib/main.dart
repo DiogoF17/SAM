@@ -22,11 +22,11 @@ class LittleLearner extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        // home: const HomePage());
-        // home: const PlayCategoriesPage());
-        // home: const LearnCategoriesPage());
-        // home: const CreditsPage());
-        // home: const Scaffold(body: PlaySpecificCategoryPage()));
-        home: const Scaffold(body: LearnSpecificCategoryPage()));
+        home: const HomePage());
+    // home: const PlayCategoriesPage());
+    // home: const LearnCategoriesPage());
+    // home: const CreditsPage());
+    // home: const PlaySpecificCategoryPage());
+    // home: const LearnSpecificCategoryPage());
   }
 }

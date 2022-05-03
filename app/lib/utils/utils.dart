@@ -19,7 +19,7 @@ Widget getTitle() {
           fontSize: 35));
 }
 
-Widget getButton(String name, double width) {
+Widget getButton(String name, double width, {action}) {
   return ElevatedButton(
       child: Text(name,
           textAlign: TextAlign.center,
@@ -28,7 +28,7 @@ Widget getButton(String name, double width) {
               fontWeight: FontWeight.bold,
               color: Colors.white,
               fontSize: 18)),
-      onPressed: null,
+      onPressed: action,
       style: ElevatedButton.styleFrom(
           minimumSize: Size(width, 40),
           shape: RoundedRectangleBorder(

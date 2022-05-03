@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 
+const appTitle = "Little Learner";
+
+// buttons
+const buttonRadius = 10.0;
+
 Color? getAppThemeColor() {
   return Colors.blue[200];
 }
 
 Widget getTitle() {
-  return const Text("Little Learner",
+  return const Text(appTitle,
       textAlign: TextAlign.center,
       style: TextStyle(
           decoration: TextDecoration.none,
@@ -27,7 +32,7 @@ Widget getButton(String name, double width) {
       style: ElevatedButton.styleFrom(
           minimumSize: Size(width, 40),
           shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10.0))));
+              borderRadius: BorderRadius.circular(buttonRadius))));
 }
 
 Widget getPersonalizedText(String text,

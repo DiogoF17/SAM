@@ -32,23 +32,35 @@ class _MyVideoPlayerState extends State<MyVideoPlayer> {
   @override
   void dispose() {
     _controller.dispose();
-
     super.dispose();
+  }
+
+  void pauseVideo() {
+    setState(() {
+      _controller.pause();
+    });
+  }
+
+  void playVideo() {
+    setState(() {
+      _controller.play();
+    });
+  }
+
+  void videoTapped() {
+    bool isPlaying = _controller.value.isPlaying;
+
+    if (isPlaying) {
+      pauseVideo();
+    } else {
+      playVideo();
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-        onTap: () => {
-              // play and pause video
-              setState(() {
-                if (_controller.value.isPlaying) {
-                  _controller.pause();
-                } else {
-                  _controller.play();
-                }
-              })
-            },
+        onTap: videoTapped,
         child: FutureBuilder(
           future: _initializeVideoPlayerFuture,
           builder: (context, snapshot) {

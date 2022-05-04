@@ -21,7 +21,7 @@ class PlayCategoriesPage extends StatelessWidget {
           Column(children: getCategories(context)),
           Column(children: <Widget>[
             const SizedBox(height: 20.0),
-            getButton("Voltar", 100.0, action: () => {Navigator.pop(context)}),
+            getButton("Voltar", 100.0, action: () => {previousPage(context)}),
             const SizedBox(height: 20.0)
           ])
         ]));
@@ -33,14 +33,8 @@ class PlayCategoriesPage extends StatelessWidget {
     for (int i = 0; i < 20; i++) {
       categories.add(Container(
           child: getButton("Category " + i.toString(), 350.0,
-              action: () => {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              const PlaySpecificCategoryPage()),
-                    )
-                  })));
+              action: () =>
+                  {nextPage(context, const PlaySpecificCategoryPage())})));
     }
 
     return categories;

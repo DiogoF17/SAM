@@ -19,29 +19,11 @@ class HomePage extends StatelessWidget {
             getTitle(),
             const SizedBox(height: 40.0),
             getButton("Jogar", 150.0,
-                action: () => {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const PlayCategoriesPage()),
-                      )
-                    }),
+                action: () => {nextPage(context, const PlayCategoriesPage())}),
             getButton("Aprender", 150.0,
-                action: () => {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const LearnCategoriesPage()),
-                      )
-                    }),
+                action: () => {nextPage(context, const LearnCategoriesPage())}),
             getButton("Créditos", 150.0,
-                action: () => {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const CreditsPage()),
-                      )
-                    }),
+                action: () => {nextPage(context, const CreditsPage())}),
           ],
         ));
   }

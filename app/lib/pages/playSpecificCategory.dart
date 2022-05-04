@@ -31,7 +31,7 @@ class _PlaySpecificCategoryPageState extends State<PlaySpecificCategoryPage> {
                         IconButton(
                             icon: const Icon(Icons.home,
                                 color: Colors.white, size: 35.0),
-                            onPressed: () => {Navigator.pop(context)})
+                            onPressed: () => {previousPage(context)})
                       ]),
                   const SizedBox(height: 20.0),
                   // -------------

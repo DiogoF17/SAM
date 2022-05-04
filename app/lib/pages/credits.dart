@@ -23,7 +23,7 @@ class CreditsPage extends StatelessWidget {
           const SizedBox(height: 10.0),
           getPersonalizedText("Marcelo Reis"),
           const SizedBox(height: 50.0),
-          getButton("Voltar", 100.0, action: () => {Navigator.pop(context)}),
+          getButton("Voltar", 100.0, action: () => {previousPage(context)}),
         ]));
   }
 }

@@ -33,7 +33,7 @@ class _LearnSpecificCategoryPageState extends State<LearnSpecificCategoryPage> {
                         IconButton(
                             icon: const Icon(Icons.home,
                                 color: Colors.white, size: 35.0),
-                            onPressed: () => {Navigator.pop(context)})
+                            onPressed: () => {previousPage(context)})
                       ]),
                   const SizedBox(height: 20.0),
                   // -------------
@@ -48,7 +48,7 @@ class _LearnSpecificCategoryPageState extends State<LearnSpecificCategoryPage> {
                   const SizedBox(height: 50.0),
                   // getImage(),
                   getVideo(),
-                  const SizedBox(height: 50.0),
+                  const SizedBox(height: 110.0),
                   // --------------------
                   // button of hear sound
                   Container(

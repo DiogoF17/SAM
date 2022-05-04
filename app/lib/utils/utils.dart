@@ -45,3 +45,16 @@ Widget getPersonalizedText(String text,
           color: Colors.white,
           fontSize: fontSize));
 }
+
+// Pages
+
+void nextPage(BuildContext context, Widget nextPage) {
+  Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => nextPage),
+  );
+}
+
+void previousPage(BuildContext context) {
+  Navigator.pop(context);
+}

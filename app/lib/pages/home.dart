@@ -4,6 +4,7 @@ import "../utils/utils.dart";
 import 'package:app/pages/playCategories.dart';
 import 'package:app/pages/learnCategories.dart';
 import 'package:app/pages/credits.dart';
+import 'package:app/database/database.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);

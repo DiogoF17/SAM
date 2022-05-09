@@ -6,6 +6,7 @@ import '../database/database.dart';
 import '../database/category.dart';
 import '../database/media.dart';
 import "../utils/videoPlayer.dart";
+import 'dart:async';
 
 class PlaySpecificCategoryPage extends StatefulWidget {
   final Category category;
@@ -83,7 +84,7 @@ class _PlaySpecificCategoryPageState extends State<PlaySpecificCategoryPage> {
                                   crossAxisCount: 2,
                                   mainAxisSpacing: 15,
                                   crossAxisSpacing: 15,
-                                  children: displayMedia())),
+                                  children: displayMedia(context))),
                           // --------------------
                           // button of hear sound
                           hearSoundButton(targetMedia.name,
@@ -100,26 +101,59 @@ class _PlaySpecificCategoryPageState extends State<PlaySpecificCategoryPage> {
             )));
   }
 
-  List<Widget> displayMedia() {
+  List<Widget> displayMedia(BuildContext context) {
     if (widget.category.mediaType == MediaType.video) {
       return displayVideos();
     } else {
-      return displayImages();
+      return displayImages(context);
     }
   }
 
-  List<Widget> displayImages() {
+  List<Widget> displayImages(BuildContext context) {
     List<Widget> ret = [];
 
     for (Media aux in media) {
       ret.add(InkWell(
-        onTap: () {},
+        onTap: () => verifyAnswer(aux.name,context),
         child: ClipRRect(
             child: Image.network(aux.path, fit: BoxFit.cover,),
             borderRadius: BorderRadius.circular(buttonRadius))));
     }
 
     return ret;
+  }
+
+  // verifies the given answer and shows an icon popup
+  Future verifyAnswer(String name, BuildContext context){
+     return showDialog(
+         context: context,
+         builder: (context) {
+           // if the answer is correct
+           if(name == targetMedia.name) {
+             Future.delayed(Duration(milliseconds: 500), (){
+               nextPage(
+                   context,
+                   PlaySpecificCategoryPage(
+                       widget.category,
+                       widget.media,
+                       widget.sequence,
+                       widget.pageNumber + 1));
+             });
+             return const Icon(
+               Icons.check,
+               color: Colors.green,
+               size: 250.0,);
+           }
+
+           // if the answer is incorrect
+           Future.delayed(Duration(milliseconds: 500), () {
+             Navigator.of(context).pop(true);
+           });
+           return const Icon(
+             Icons.close,
+             color: Colors.red,
+             size: 250.0,);
+         });
   }
 
   List<Widget> displayVideos() {

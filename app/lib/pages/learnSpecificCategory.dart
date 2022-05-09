@@ -107,9 +107,12 @@ class _LearnSpecificCategoryPageState extends State<LearnSpecificCategoryPage> {
   }
 
   Widget displayImage() {
-    return ClipRRect(
-        child: Image.network(targetMedia.path),
-        borderRadius: BorderRadius.circular(buttonRadius));
+    return Container(
+        height: 260,
+        width: 260,
+        child: ClipRRect(
+          child: Image.network(targetMedia.path, fit: BoxFit.cover,),
+          borderRadius: BorderRadius.circular(buttonRadius)));
   }
 
   Widget displayVideo() {

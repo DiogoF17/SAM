@@ -112,9 +112,11 @@ class _PlaySpecificCategoryPageState extends State<PlaySpecificCategoryPage> {
     List<Widget> ret = [];
 
     for (Media aux in media) {
-      ret.add(ClipRRect(
-          child: Image.network(aux.path),
-          borderRadius: BorderRadius.circular(buttonRadius)));
+      ret.add(InkWell(
+        onTap: () {},
+        child: ClipRRect(
+            child: Image.network(aux.path, fit: BoxFit.cover,),
+            borderRadius: BorderRadius.circular(buttonRadius))));
     }
 
     return ret;

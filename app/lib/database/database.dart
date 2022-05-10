@@ -41,14 +41,9 @@ void createDatabaseStructure(int numEntries) {
 Future<List<Category>> loadCategories() async {
   List<Category> categories = [];
 
-  DatabaseEvent databaseEvent =
-      await databaseReference.child("categories/").once();
+  Map<String, dynamic> JSON = await getAllDataFromTable("categories");
 
-  DataSnapshot databaseSnapshot = databaseEvent.snapshot;
-  if (databaseSnapshot.value != null) {
-    Map<String, dynamic> JSON =
-        json.decode(json.encode(databaseSnapshot.value));
-
+  if (JSON.isNotEmpty) {
     var keys = JSON.keys;
     for (String key in keys) {
       if (JSON[key]["name"] != "nd") {
@@ -71,13 +66,9 @@ Future<List<Media>> loadMedia(Category category) async {
 Future<List<Image>> loadImages(Category category) async {
   List<Image> images = [];
 
-  DatabaseEvent databaseEvent = await databaseReference.child("images/").once();
+  Map<String, dynamic> JSON = await getAllDataFromTable("categoriesImages");
 
-  DataSnapshot databaseSnapshot = databaseEvent.snapshot;
-  if (databaseSnapshot.value != null) {
-    Map<String, dynamic> JSON =
-        json.decode(json.encode(databaseSnapshot.value));
-
+  if (JSON.isNotEmpty) {
     var keys = JSON.keys;
     for (String key in keys) {
       if (JSON[key]["name"] != "nd") {
@@ -88,13 +79,9 @@ Future<List<Image>> loadImages(Category category) async {
 
   List<String> imageIdsToUse = [];
 
-  databaseEvent = await databaseReference.child("categoriesImages/").once();
+  JSON = await getAllDataFromTable("categoriesImages");
 
-  databaseSnapshot = databaseEvent.snapshot;
-  if (databaseSnapshot.value != null) {
-    Map<String, dynamic> JSON =
-        json.decode(json.encode(databaseSnapshot.value));
-
+  if (JSON.isNotEmpty) {
     var keys = JSON.keys;
     for (String key in keys) {
       String imageId = JSON[key]["imageId"];
@@ -112,13 +99,9 @@ Future<List<Image>> loadImages(Category category) async {
 Future<List<Video>> loadVideos(Category category) async {
   List<Video> videos = [];
 
-  DatabaseEvent databaseEvent = await databaseReference.child("videos/").once();
+  Map<String, dynamic> JSON = await getAllDataFromTable("categoriesVideos");
 
-  DataSnapshot databaseSnapshot = databaseEvent.snapshot;
-  if (databaseSnapshot.value != null) {
-    Map<String, dynamic> JSON =
-        json.decode(json.encode(databaseSnapshot.value));
-
+  if (JSON.isNotEmpty) {
     var keys = JSON.keys;
     for (String key in keys) {
       if (JSON[key]["name"] != "nd") {
@@ -129,13 +112,9 @@ Future<List<Video>> loadVideos(Category category) async {
 
   List<String> videoIdsToUse = [];
 
-  databaseEvent = await databaseReference.child("categoriesVideos/").once();
+  JSON = await getAllDataFromTable("categoriesVideos");
 
-  databaseSnapshot = databaseEvent.snapshot;
-  if (databaseSnapshot.value != null) {
-    Map<String, dynamic> JSON =
-        json.decode(json.encode(databaseSnapshot.value));
-
+  if (JSON.isNotEmpty) {
     var keys = JSON.keys;
     for (String key in keys) {
       String videoId = JSON[key]["videoId"];
@@ -148,4 +127,38 @@ Future<List<Video>> loadVideos(Category category) async {
   videos.removeWhere((element) => !videoIdsToUse.contains(element.id));
 
   return videos;
+}
+
+Future<Map<String, dynamic>> getAllDataFromTable(String tableName) async {
+  DatabaseEvent databaseEvent = await databaseReference.child(tableName).once();
+  Map<String, dynamic> JSON = <String, dynamic>{};
+  DataSnapshot databaseSnapshot = databaseEvent.snapshot;
+
+  if (databaseSnapshot.value != null) JSON = json.decode(json.encode(databaseSnapshot.value));
+
+  return JSON;
+}
+
+
+Future removeRowByAttribute(String tableName,String attribute, String value) async{
+  Map<String, dynamic> JSON = await getAllDataFromTable(tableName);
+
+  if (JSON.isNotEmpty) {
+    var keys = JSON.keys;
+    for (String key in keys) {
+      String temp = JSON[key][attribute];
+
+      if (temp == value) databaseReference.child(tableName+"/"+key).remove();
+    }
+  }
+
+}
+
+void addImageToDB(String name, String path){
+  DatabaseReference imgRef = databaseReference.child("images").push();
+  imgRef.set({"name": name, "path": path});
+  DatabaseReference categoriesImagesRef =
+  databaseReference.child("categoriesImages").push();
+  // -N1KEBRZW3Zx_kzYL2_t - categoria animais
+  categoriesImagesRef.set({"categoryId": "-N1KEBRZW3Zx_kzYL2_t", "imageId": imgRef.key});
 }

@@ -57,7 +57,7 @@ class _PlayCategoriesPageState extends State<PlayCategoriesPage> {
 
     for (Category category in categories) {
       categoriesWidget.add(Container(
-          child: getButton("Categoria: " + category.name, 350.0,
+          child: getButton("Categoria: " + capitalize(category.name), 350.0,
               action: () => {
                     nextPage(
                         context, PlaySpecificCategoryPage(category, [], [], 0))

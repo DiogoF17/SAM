@@ -57,7 +57,7 @@ class _LearnCategoriesPageState extends State<LearnCategoriesPage> {
 
     for (Category category in categories) {
       categoriesWidget.add(Container(
-          child: getButton("Categoria: " + category.name, 350.0,
+          child: getButton("Categoria: " + capitalize(category.name), 350.0,
               action: () => {
                     nextPage(
                         context, LearnSpecificCategoryPage(category, [], [], 0))

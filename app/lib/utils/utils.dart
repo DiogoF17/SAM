@@ -1,3 +1,4 @@
+import 'package:app/pages/home.dart';
 import 'package:flutter/material.dart';
 import "dart:math";
 
@@ -75,7 +76,7 @@ Widget hearSoundButton(String soundName, {action}) {
       child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            getPersonalizedText(soundName),
+            getPersonalizedText(capitalize(soundName)),
             Column(children: <Widget>[
               IconButton(
                   icon: Icon(Icons.volume_up, color: Colors.white),
@@ -92,7 +93,7 @@ Widget topBarSpecificCategoriesPage(BuildContext context) {
         getTitle(),
         IconButton(
             icon: const Icon(Icons.home, color: Colors.white, size: 35.0),
-            onPressed: () => {previousPage(context)})
+            onPressed: () => {clearNavigationStack(context,HomePage())})
       ]);
 }
 
@@ -100,7 +101,7 @@ Widget subtitleSpecificCategoriesPage(
     BuildContext context, String categoryName) {
   return SizedBox(
       width: MediaQuery.of(context).size.width * 0.8,
-      child: getPersonalizedText("Aprender - Categoria: " + categoryName,
+      child: getPersonalizedText("Aprender - Categoria: " + capitalize(categoryName),
           alignment: TextAlign.center));
 }
 
@@ -119,6 +120,15 @@ void previousPage(BuildContext context) {
   Navigator.pop(context);
 }
 
+void clearNavigationStack(BuildContext context, Widget page){
+  Navigator.pushAndRemoveUntil(
+    context,
+    MaterialPageRoute(
+      builder: (BuildContext context) => page,
+    ),
+        (route) => false,
+  );
+}
 // ************************************************************************************
 
 List<int> generateSequence(List<Media> media, int size) {
@@ -149,4 +159,11 @@ List<Media> selectRemainingMedia(List<Media> media, Media targetMedia) {
   }
 
   return [media[indexes[0]], media[indexes[1]], media[indexes[2]]];
+}
+
+String capitalize(String string){
+  if (string.isEmpty) {
+    return string;
+  }
+  return string[0].toUpperCase() + string.substring(1);
 }

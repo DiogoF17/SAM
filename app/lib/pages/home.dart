@@ -11,6 +11,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    runDBOperations();
     return Container(
         color: getAppThemeColor(),
         child: Column(

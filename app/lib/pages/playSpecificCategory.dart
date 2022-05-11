@@ -114,7 +114,10 @@ class _PlaySpecificCategoryPageState extends State<PlaySpecificCategoryPage> {
 
     for (Media aux in media) {
       ret.add(InkWell(
-        onTap: () => verifyAnswer(aux.name,context),
+        onTap: () {
+          print("ImageId: " + aux.id);
+          verifyAnswer(aux.name,context);
+        },
         child: ClipRRect(
             child: Image.network(aux.path, fit: BoxFit.cover,),
             borderRadius: BorderRadius.circular(buttonRadius))));

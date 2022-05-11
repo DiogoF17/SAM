@@ -66,7 +66,7 @@ Future<List<Media>> loadMedia(Category category) async {
 Future<List<Image>> loadImages(Category category) async {
   List<Image> images = [];
 
-  Map<String, dynamic> JSON = await getAllDataFromTable("categoriesImages");
+  Map<String, dynamic> JSON = await getAllDataFromTable("images");
 
   if (JSON.isNotEmpty) {
     var keys = JSON.keys;
@@ -99,7 +99,7 @@ Future<List<Image>> loadImages(Category category) async {
 Future<List<Video>> loadVideos(Category category) async {
   List<Video> videos = [];
 
-  Map<String, dynamic> JSON = await getAllDataFromTable("categoriesVideos");
+  Map<String, dynamic> JSON = await getAllDataFromTable("videos");
 
   if (JSON.isNotEmpty) {
     var keys = JSON.keys;
@@ -140,25 +140,58 @@ Future<Map<String, dynamic>> getAllDataFromTable(String tableName) async {
 }
 
 
-Future removeRowByAttribute(String tableName,String attribute, String value) async{
+Future removeTableRowByAttribute(String tableName, String attribute, String value) async{
   Map<String, dynamic> JSON = await getAllDataFromTable(tableName);
 
   if (JSON.isNotEmpty) {
     var keys = JSON.keys;
     for (String key in keys) {
       String temp = JSON[key][attribute];
-
       if (temp == value) databaseReference.child(tableName+"/"+key).remove();
     }
   }
 
 }
 
-void addImageToDB(String name, String path){
+Future removeTableRowByKey(String tableName, String key) async{
+  Map<String, dynamic> JSON = await getAllDataFromTable(tableName);
+
+  if (JSON.isNotEmpty) {
+    var keys = JSON.keys;
+    if (keys.contains(key)) databaseReference.child(tableName+"/"+key).remove();
+  }
+}
+
+Future removeImageFromDB(String key) async{
+  await removeTableRowByKey("images", key);
+  await removeTableRowByAttribute("sounds","imageId",key);
+  await removeTableRowByAttribute("categoriesImages","imageId",key);
+}
+
+void addImageToDB(String name, String path, String categoryId){
   DatabaseReference imgRef = databaseReference.child("images").push();
   imgRef.set({"name": name, "path": path});
   DatabaseReference categoriesImagesRef =
   databaseReference.child("categoriesImages").push();
-  // -N1KEBRZW3Zx_kzYL2_t - categoria animais
-  categoriesImagesRef.set({"categoryId": "-N1KEBRZW3Zx_kzYL2_t", "imageId": imgRef.key});
+  categoriesImagesRef.set({"categoryId": categoryId, "imageId": imgRef.key});
+}
+
+void addVideoToDB(String name, String path, String categoryId){
+  DatabaseReference videoRef = databaseReference.child("videos").push();
+  videoRef.set({"name": name, "path": path});
+  DatabaseReference categoriesVideosRef =
+  databaseReference.child("categoriesVideos").push();
+  categoriesVideosRef.set({"categoryId": categoryId, "videoId": videoRef.key});
+}
+
+void addSoundToDB(String name, String path, String imageId, String videoId, String categoryId){
+  DatabaseReference soundRef = databaseReference.child("sounds").push();
+  soundRef.set({"name": name, "path": path, "imageId": imageId, "videoId": videoId});
+  DatabaseReference categoriesSoundsRef = databaseReference.child("categoriesSounds").push();
+  categoriesSoundsRef.set({"categoryId": categoryId, "soundId": soundRef.key});
+}
+
+void runDBOperations(){
+  //removeImageFromDB("-N1jKT2zOE0asfrb8xjI");
+  //removeImageFromDB("-N1jKSz1_1jT3udK5yLZ");
 }

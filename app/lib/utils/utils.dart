@@ -151,10 +151,22 @@ List<Media> selectRemainingMedia(List<Media> media, Media targetMedia) {
 
   var random = Random();
   int index;
+  bool sameMediaName = false;
+
   while (indexes.length < 3) {
     index = random.nextInt(media.length);
-    if (!indexes.contains(index) && media[index].id != targetMedia.id) {
-      indexes.add(index);
+    if ( (!indexes.contains(index)) && (media[index].id != targetMedia.id) && (media[index].name != targetMedia.name) ) {
+
+      // verifies if already exists one media with the same name inside the list
+      for(var i in indexes) {
+        if (media[i].name == media[index].name){
+          sameMediaName = true;
+          break;
+        }
+      }
+      if(!sameMediaName) indexes.add(index);
+
+      sameMediaName = false;
     }
   }
 

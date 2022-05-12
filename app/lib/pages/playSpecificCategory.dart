@@ -160,12 +160,29 @@ class _PlaySpecificCategoryPageState extends State<PlaySpecificCategoryPage> {
   }
 
   List<Widget> displayVideos() {
+    /*
     List<Widget> ret = [];
 
     for (Media aux in media) {
       ret.add(ClipRRect(
           child: MyVideoPlayer(aux.name, aux.path),
           borderRadius: BorderRadius.circular(buttonRadius)));
+    }
+
+    return ret;
+     */
+
+    List<Widget> ret = [];
+
+    for (Media aux in media) {
+      ret.add(InkWell(
+          onTap: () {
+            print("ImageId: " + aux.id);
+            verifyAnswer(aux.name,context);
+          },
+          child: ClipRRect(
+              child: Image.network(aux.path),
+              borderRadius: BorderRadius.circular(buttonRadius))));
     }
 
     return ret;

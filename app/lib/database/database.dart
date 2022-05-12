@@ -176,7 +176,7 @@ void addImageToDB(String name, String path, String categoryId){
   categoriesImagesRef.set({"categoryId": categoryId, "imageId": imgRef.key});
 }
 
-void addVideoToDB(String name, String path, String categoryId){
+void addVideoToDB(String name, String? path, String? categoryId){
   DatabaseReference videoRef = databaseReference.child("videos").push();
   videoRef.set({"name": name, "path": path});
   DatabaseReference categoriesVideosRef =
@@ -192,6 +192,5 @@ void addSoundToDB(String name, String path, String imageId, String videoId, Stri
 }
 
 void runDBOperations(){
-  //removeImageFromDB("-N1jKT2zOE0asfrb8xjI");
-  //removeImageFromDB("-N1jKSz1_1jT3udK5yLZ");
+
 }

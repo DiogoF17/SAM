@@ -86,6 +86,20 @@ Widget hearSoundButton(String soundName, {action}) {
           ]));
 }
 
+Widget homePageIcon(BuildContext context) {
+  return  Material(
+
+    color: getAppThemeColor(),
+    child: Center(
+      child: IconButton(
+          icon: const Icon(Icons.home),
+          color: Colors.white,
+          onPressed: () => {clearNavigationStack(context,HomePage())},
+        ),
+      ),
+    );
+}
+
 Widget topBarSpecificCategoriesPage(BuildContext context) {
   return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,

@@ -1,12 +1,14 @@
-import 'package:app/pages/gameOver.dart';
 import 'package:flutter/material.dart';
 
 import "../utils/utils.dart";
-import 'package:app/pages/playCategories.dart';
-import 'package:app/pages/learnCategories.dart';
+
+import 'package:app/pages/loadingScreen.dart';
 import 'package:app/pages/credits.dart';
+
 import 'package:app/database/database.dart';
 
+import 'package:app/loadAction/loadActionForPlayCategories.dart';
+import 'package:app/loadAction/loadActionForLearnCategories.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -23,9 +25,15 @@ class HomePage extends StatelessWidget {
             getTitle(),
             const SizedBox(height: 40.0),
             getButton("Jogar", 150.0,
-                action: () => {nextPage(context, const PlayCategoriesPage())}),
+                action: () => {
+                      nextPage(
+                          context, LoadingScreen(LoadActionForPlayCategories()))
+                    }),
             getButton("Aprender", 150.0,
-                action: () => {nextPage(context, const LearnCategoriesPage())}),
+                action: () => {
+                      nextPage(context,
+                          LoadingScreen(LoadActionForLearnCategories()))
+                    }),
             getButton("Créditos", 150.0,
                 action: () => {nextPage(context, const CreditsPage())}),
           ],

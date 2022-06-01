@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 import "../utils/utils.dart";
-import '../database/media.dart';
+import '../database/image.dart';
 import "../utils/mediaController.dart";
 
 class LearnSpecificCategoryPage extends StatefulWidget {
@@ -17,8 +18,9 @@ class LearnSpecificCategoryPage extends StatefulWidget {
 
 class _LearnSpecificCategoryPageState extends State<LearnSpecificCategoryPage> {
   final FlutterTts flutterTts = FlutterTts();
+  final AudioPlayer audioPlayer = AudioPlayer();
 
-  late Media targetMedia;
+  late MyImage targetMedia;
 
   @override
   void initState() {
@@ -34,6 +36,10 @@ class _LearnSpecificCategoryPageState extends State<LearnSpecificCategoryPage> {
     await flutterTts.setLanguage("pt-PT");
     await flutterTts.setPitch(1.5);
     await flutterTts.speak(text);
+  }
+
+  void playAudio(String path) async {
+    await audioPlayer.play(path);
   }
 
   @override
@@ -52,12 +58,22 @@ class _LearnSpecificCategoryPageState extends State<LearnSpecificCategoryPage> {
                   const SizedBox(height: 50.0),
                   displayMedia(),
                   const SizedBox(height: 110.0),
-                  hearSoundButton(targetMedia.name,
-                      action: () => speak(targetMedia.name)),
+                  displaySoundButton(),
                   const SizedBox(height: 20.0),
                   bottomButtons(context),
                   const SizedBox(height: 20.0)
                 ]))));
+  }
+
+  Widget displaySoundButton() {
+    if (widget.mediaController.hasSounds()) {
+      return hearSoundButton(targetMedia.name,
+          action: () =>
+              playAudio(widget.mediaController.getPathOfCurrentSound()));
+    } else {
+      return hearSoundButton(targetMedia.name,
+          action: () => speak(targetMedia.name));
+    }
   }
 
   Widget displayMedia() {

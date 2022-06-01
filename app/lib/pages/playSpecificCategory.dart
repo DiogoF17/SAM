@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'dart:async';
+import 'package:audioplayers/audioplayers.dart';
 
 import "../utils/utils.dart";
 import "../utils/mediaController.dart";
 
-import '../database/media.dart';
+import '../database/image.dart';
 
 import 'gameOver.dart';
 
@@ -20,10 +21,11 @@ class PlaySpecificCategoryPage extends StatefulWidget {
 }
 
 class _PlaySpecificCategoryPageState extends State<PlaySpecificCategoryPage> {
-  late Media targetMedia = Media();
-  late List<Media> allMedia = [];
+  late MyImage targetMedia;
+  late List<MyImage> allMedia = [];
 
   final FlutterTts flutterTts = FlutterTts();
+  final AudioPlayer audioPlayer = AudioPlayer();
 
   @override
   void initState() {
@@ -45,6 +47,10 @@ class _PlaySpecificCategoryPageState extends State<PlaySpecificCategoryPage> {
     await flutterTts.speak(text);
   }
 
+  void playAudio(String path) async {
+    await audioPlayer.play(path);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,8 +70,7 @@ class _PlaySpecificCategoryPageState extends State<PlaySpecificCategoryPage> {
                           mainAxisSpacing: 15,
                           crossAxisSpacing: 15,
                           children: displayMedia(context))),
-                  hearSoundButton(targetMedia.name,
-                      action: () => speak(targetMedia.name)),
+                  displaySoundButton(),
                   const SizedBox(height: 20.0)
                 ]))));
   }
@@ -73,7 +78,7 @@ class _PlaySpecificCategoryPageState extends State<PlaySpecificCategoryPage> {
   List<Widget> displayMedia(BuildContext context) {
     List<Widget> ret = [];
 
-    for (Media aux in allMedia) {
+    for (MyImage aux in allMedia) {
       ret.add(InkWell(
           onTap: () {
             verifyAnswer(aux.name, context);
@@ -93,6 +98,17 @@ class _PlaySpecificCategoryPageState extends State<PlaySpecificCategoryPage> {
     }
 
     return ret;
+  }
+
+  Widget displaySoundButton() {
+    if (widget.mediaController.hasSounds()) {
+      return hearSoundButton(targetMedia.name,
+          action: () =>
+              playAudio(widget.mediaController.getPathOfCurrentSound()));
+    } else {
+      return hearSoundButton(targetMedia.name,
+          action: () => speak(targetMedia.name));
+    }
   }
 
   // verifies the given answer and shows an icon popup

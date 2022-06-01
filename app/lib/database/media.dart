@@ -11,16 +11,4 @@ class Media {
     this.name = name;
     this.path = path;
   }
-
-  bool isSound() {
-    return false;
-  }
-
-  bool isImage() {
-    return false;
-  }
-
-  bool isVideo() {
-    return false;
-  }
 }

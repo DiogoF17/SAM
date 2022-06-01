@@ -1,16 +1,15 @@
 import "media.dart";
 
-class Image extends Media {
-  Image(String id, String name, String path)
-      : super(id: id, name: name, path: path);
+class MyImage extends Media {
+  String soundId = "";
 
-  @override
-  static Image fromJSON(String id, Map<String, dynamic> json) {
-    return Image(id, json["name"], json["path"]);
+  MyImage(String id, String name, String path, String soundId_)
+      : super(id: id, name: name, path: path) {
+    soundId = soundId_;
   }
 
   @override
-  bool isImage() {
-    return true;
+  static MyImage fromJSON(String id, Map<String, dynamic> json) {
+    return MyImage(id, json["name"], json["path"], json["soundId"]);
   }
 }

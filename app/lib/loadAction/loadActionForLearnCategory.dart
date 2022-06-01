@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import "./loadAction.dart";
 
 import "../database/database.dart";
-import "../database/media.dart";
+import "../database/image.dart";
+import "../database/sound.dart";
 import "../database/category.dart";
 
 import "../utils/utils.dart";
@@ -18,8 +19,13 @@ class LoadActionForLearnCategory extends LoadAction {
 
   @override
   void execute(BuildContext context) async {
-    List<Media> media = await loadMedia(category);
+    List<MyImage> media = await loadMedia(category);
     MediaController mediaController = MediaController(category, media, 5);
+
+    if (mediaController.hasSounds()) {
+      List<Sound> sounds = await loadSounds(category);
+      mediaController.setSounds(sounds);
+    }
 
     replaceCurrentPage(context, LearnSpecificCategoryPage(mediaController));
   }

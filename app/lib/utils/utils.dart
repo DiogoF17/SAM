@@ -152,49 +152,6 @@ void clearNavigationStack(BuildContext context, Widget page) {
 }
 // ************************************************************************************
 
-List<int> generateSequence(List<Media> media, int size) {
-  List<int> indexes = [];
-  for (int i = 0; i < media.length; i++) {
-    indexes.add(i);
-  }
-
-  indexes.shuffle();
-
-  if (size >= indexes.length) {
-    return indexes;
-  } else {
-    return indexes.sublist(0, size);
-  }
-}
-
-List<Media> selectRemainingMedia(List<Media> media, Media targetMedia) {
-  List<int> indexes = [];
-
-  var random = Random();
-  int index;
-  bool sameMediaName = false;
-
-  while (indexes.length < 3) {
-    index = random.nextInt(media.length);
-    if ((!indexes.contains(index)) &&
-        (media[index].id != targetMedia.id) &&
-        (media[index].name != targetMedia.name)) {
-      // verifies if already exists one media with the same name inside the list
-      for (var i in indexes) {
-        if (media[i].name == media[index].name) {
-          sameMediaName = true;
-          break;
-        }
-      }
-      if (!sameMediaName) indexes.add(index);
-
-      sameMediaName = false;
-    }
-  }
-
-  return [media[indexes[0]], media[indexes[1]], media[indexes[2]]];
-}
-
 String capitalize(String string) {
   if (string.isEmpty) {
     return string;

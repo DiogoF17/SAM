@@ -1,4 +1,5 @@
-import '../database/media.dart';
+import '../database/image.dart';
+import '../database/sound.dart';
 import '../database/category.dart';
 import '../utils/sequence.dart';
 
@@ -7,12 +8,31 @@ import "dart:math";
 class MediaController {
   Category category;
 
-  List<Media> media = [];
+  List<MyImage> media = [];
+  List<Sound> sounds = [];
 
   late Sequence sequence;
 
   MediaController(this.category, this.media, int sequenceSize) {
     sequence = Sequence(sequenceSize, media.length);
+  }
+
+  void setSounds(List<Sound> sounds_) {
+    sounds = sounds_;
+  }
+
+  bool hasSounds() {
+    return sounds.isNotEmpty;
+  }
+
+  String getPathOfCurrentSound() {
+    String soundId = getTargetMedia().soundId;
+
+    for (Sound sound in sounds) {
+      if (sound.id == soundId) return sound.path;
+    }
+
+    return "";
   }
 
   String getCategoryName() {
@@ -35,20 +55,20 @@ class MediaController {
     return sequence.isLastValueInSequence();
   }
 
-  Media getTargetMedia() {
+  MyImage getTargetMedia() {
     return media[sequence.getCurrentValueInSequence()];
   }
 
-  List<Media> getDifferentTypesOfMedia(
-      List<Media> currMedia, int numberOfMedia) {
-    List<Media> copyOfMedia = [...media];
+  List<MyImage> getDifferentTypesOfMedia(
+      List<MyImage> currMedia, int numberOfMedia) {
+    List<MyImage> copyOfMedia = [...media];
 
     var random = Random();
 
     int missingNumberOfMedia = numberOfMedia - currMedia.length;
     while (missingNumberOfMedia > 0 && copyOfMedia.isNotEmpty) {
       int generatedIndex = random.nextInt(copyOfMedia.length);
-      Media selectedMedia = copyOfMedia[generatedIndex];
+      MyImage selectedMedia = copyOfMedia[generatedIndex];
 
       copyOfMedia.removeAt(generatedIndex);
 
@@ -61,8 +81,8 @@ class MediaController {
     return currMedia;
   }
 
-  bool isNewMediaType(Media newMedia, List<Media> oldMedia) {
-    for (Media aux in oldMedia) {
+  bool isNewMediaType(MyImage newMedia, List<MyImage> oldMedia) {
+    for (MyImage aux in oldMedia) {
       if (aux.name == newMedia.name) return false;
     }
 

@@ -54,23 +54,16 @@ class _PlaySpecificCategoryPageState extends State<PlaySpecificCategoryPage> {
                 padding: const EdgeInsets.only(left: 10, right: 10),
                 child: Column(children: <Widget>[
                   const SizedBox(height: 100.0),
-                  // ------------------------
-                  // top bar with home button
                   topBarSpecificCategoriesPage(context),
-                  // -------------
-                  // category name
                   subtitleSpecificCategoriesPage(
                       context, widget.mediaController.getCategoryName()),
-                  // --------------
-                  // images/videos section
+                  const SizedBox(height: 40.0),
                   Expanded(
                       child: GridView.count(
                           crossAxisCount: 2,
                           mainAxisSpacing: 15,
                           crossAxisSpacing: 15,
                           children: displayMedia(context))),
-                  // --------------------
-                  // button of hear sound
                   hearSoundButton(targetMedia.name,
                       action: () => speak(targetMedia.name)),
                   const SizedBox(height: 20.0)
@@ -78,14 +71,6 @@ class _PlaySpecificCategoryPageState extends State<PlaySpecificCategoryPage> {
   }
 
   List<Widget> displayMedia(BuildContext context) {
-    /*if (widget.category.mediaType == MediaType.video) {
-      return displayVideos();
-    } else {*/
-    return displayImages(context);
-    //}
-  }
-
-  List<Widget> displayImages(BuildContext context) {
     List<Widget> ret = [];
 
     for (Media aux in allMedia) {
@@ -96,7 +81,13 @@ class _PlaySpecificCategoryPageState extends State<PlaySpecificCategoryPage> {
           child: ClipRRect(
               child: Image.network(
                 aux.path,
-                fit: BoxFit.cover,
+                // fit: BoxFit.cover,
+                loadingBuilder: (context, child, loadingProgress) {
+                  if (loadingProgress == null) return child;
+                  return const Center(
+                    child: Text("loading"),
+                  );
+                },
               ),
               borderRadius: BorderRadius.circular(buttonRadius))));
     }
@@ -137,33 +128,5 @@ class _PlaySpecificCategoryPageState extends State<PlaySpecificCategoryPage> {
             size: 250.0,
           );
         });
-  }
-
-  List<Widget> displayVideos() {
-    /*
-    List<Widget> ret = [];
-
-    for (Media aux in media) {
-      ret.add(ClipRRect(
-          child: MyVideoPlayer(aux.name, aux.path),
-          borderRadius: BorderRadius.circular(buttonRadius)));
-    }
-
-    return ret;
-     */
-
-    List<Widget> ret = [];
-
-    for (Media aux in allMedia) {
-      ret.add(InkWell(
-          onTap: () {
-            verifyAnswer(aux.name, context);
-          },
-          child: ClipRRect(
-              child: Image.network(aux.path),
-              borderRadius: BorderRadius.circular(buttonRadius))));
-    }
-
-    return ret;
   }
 }

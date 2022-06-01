@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 
 import "../utils/utils.dart";
-import "../utils/videoPlayer.dart";
 import '../database/media.dart';
 import "../utils/mediaController.dart";
 
@@ -46,55 +45,37 @@ class _LearnSpecificCategoryPageState extends State<LearnSpecificCategoryPage> {
                 padding: const EdgeInsets.only(left: 10, right: 10),
                 child: Column(children: <Widget>[
                   const SizedBox(height: 100.0),
-                  // ------------------------
-                  // top bar with home button
                   topBarSpecificCategoriesPage(context),
                   const SizedBox(height: 20.0),
-                  // -------------
-                  // category name
                   subtitleSpecificCategoriesPage(
                       context, widget.mediaController.getCategoryName()),
-                  // --------------
-                  // image/video section
                   const SizedBox(height: 50.0),
                   displayMedia(),
                   const SizedBox(height: 110.0),
-                  // --------------------
-                  // button of hear sound
                   hearSoundButton(targetMedia.name,
                       action: () => speak(targetMedia.name)),
                   const SizedBox(height: 20.0),
-                  // -----------------------------
-                  // buttons for next and previous
                   bottomButtons(context),
                   const SizedBox(height: 20.0)
                 ]))));
   }
 
   Widget displayMedia() {
-    /*if (widget.category.mediaType == MediaType.video) {
-      return displayVideo();
-    } else {*/
-    return displayImage();
-    //}
-  }
-
-  Widget displayImage() {
     return Container(
         height: 260,
         width: 260,
         child: ClipRRect(
             child: Image.network(
               targetMedia.path,
-              fit: BoxFit.cover,
+              // fit: BoxFit.cover,
+              loadingBuilder: (context, child, loadingProgress) {
+                if (loadingProgress == null) return child;
+                return const Center(
+                  child: Text("loading"),
+                );
+              },
             ),
             borderRadius: BorderRadius.circular(buttonRadius)));
-  }
-
-  Widget displayVideo() {
-    return ClipRRect(
-        child: MyVideoPlayer(targetMedia.name, targetMedia.path),
-        borderRadius: BorderRadius.circular(buttonRadius));
   }
 
   Widget bottomButtons(BuildContext context) {

@@ -168,6 +168,12 @@ Future removeImageFromDB(String key) async{
   await removeTableRowByAttribute("categoriesImages","imageId",key);
 }
 
+Future removeVideosFromDB(String key) async{
+  await removeTableRowByKey("videos", key);
+  await removeTableRowByAttribute("sounds","videoId",key);
+  await removeTableRowByAttribute("categoriesVideos","videoId",key);
+}
+
 void addImageToDB(String name, String path, String categoryId){
   DatabaseReference imgRef = databaseReference.child("images").push();
   imgRef.set({"name": name, "path": path});

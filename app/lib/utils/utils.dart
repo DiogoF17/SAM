@@ -87,17 +87,16 @@ Widget hearSoundButton(String soundName, {action}) {
 }
 
 Widget homePageIcon(BuildContext context) {
-  return  Material(
-
+  return Material(
     color: getAppThemeColor(),
     child: Center(
       child: IconButton(
-          icon: const Icon(Icons.home),
-          color: Colors.white,
-          onPressed: () => {clearNavigationStack(context,HomePage())},
-        ),
+        icon: const Icon(Icons.home),
+        color: Colors.white,
+        onPressed: () => {clearNavigationStack(context, HomePage())},
       ),
-    );
+    ),
+  );
 }
 
 Widget topBarSpecificCategoriesPage(BuildContext context) {
@@ -107,7 +106,7 @@ Widget topBarSpecificCategoriesPage(BuildContext context) {
         getTitle(),
         IconButton(
             icon: const Icon(Icons.home, color: Colors.white, size: 35.0),
-            onPressed: () => {clearNavigationStack(context,HomePage())})
+            onPressed: () => {clearNavigationStack(context, HomePage())})
       ]);
 }
 
@@ -115,7 +114,8 @@ Widget subtitleSpecificCategoriesPage(
     BuildContext context, String categoryName) {
   return SizedBox(
       width: MediaQuery.of(context).size.width * 0.8,
-      child: getPersonalizedText("Aprender - Categoria: " + capitalize(categoryName),
+      child: getPersonalizedText(
+          "Aprender - Categoria: " + capitalize(categoryName),
           alignment: TextAlign.center));
 }
 
@@ -130,17 +130,24 @@ void nextPage(BuildContext context, Widget nextPage) {
   );
 }
 
+void replaceCurrentPage(BuildContext context, Widget nextPage) {
+  Navigator.pushReplacement<void, void>(
+    context,
+    MaterialPageRoute(builder: (context) => nextPage),
+  );
+}
+
 void previousPage(BuildContext context) {
   Navigator.pop(context);
 }
 
-void clearNavigationStack(BuildContext context, Widget page){
+void clearNavigationStack(BuildContext context, Widget page) {
   Navigator.pushAndRemoveUntil(
     context,
     MaterialPageRoute(
       builder: (BuildContext context) => page,
     ),
-        (route) => false,
+    (route) => false,
   );
 }
 // ************************************************************************************
@@ -169,16 +176,17 @@ List<Media> selectRemainingMedia(List<Media> media, Media targetMedia) {
 
   while (indexes.length < 3) {
     index = random.nextInt(media.length);
-    if ( (!indexes.contains(index)) && (media[index].id != targetMedia.id) && (media[index].name != targetMedia.name) ) {
-
+    if ((!indexes.contains(index)) &&
+        (media[index].id != targetMedia.id) &&
+        (media[index].name != targetMedia.name)) {
       // verifies if already exists one media with the same name inside the list
-      for(var i in indexes) {
-        if (media[i].name == media[index].name){
+      for (var i in indexes) {
+        if (media[i].name == media[index].name) {
           sameMediaName = true;
           break;
         }
       }
-      if(!sameMediaName) indexes.add(index);
+      if (!sameMediaName) indexes.add(index);
 
       sameMediaName = false;
     }
@@ -187,7 +195,7 @@ List<Media> selectRemainingMedia(List<Media> media, Media targetMedia) {
   return [media[indexes[0]], media[indexes[1]], media[indexes[2]]];
 }
 
-String capitalize(String string){
+String capitalize(String string) {
   if (string.isEmpty) {
     return string;
   }

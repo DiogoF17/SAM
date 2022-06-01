@@ -46,8 +46,7 @@ class MediaController {
     var random = Random();
 
     int missingNumberOfMedia = numberOfMedia - currMedia.length;
-    while (
-        missingNumberOfMedia > 0 && copyOfMedia.length > missingNumberOfMedia) {
+    while (missingNumberOfMedia > 0 && copyOfMedia.isNotEmpty) {
       int generatedIndex = random.nextInt(copyOfMedia.length);
       Media selectedMedia = copyOfMedia[generatedIndex];
 

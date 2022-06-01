@@ -21,6 +21,6 @@ class LoadActionForPlayCategory extends LoadAction {
     List<Media> media = await loadMedia(category);
     MediaController mediaController = MediaController(category, media, 5);
 
-    nextPage(context, PlaySpecificCategoryPage(mediaController));
+    replaceCurrentPage(context, PlaySpecificCategoryPage(mediaController));
   }
 }

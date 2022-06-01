@@ -21,6 +21,6 @@ class LoadActionForLearnCategory extends LoadAction {
     List<Media> media = await loadMedia(category);
     MediaController mediaController = MediaController(category, media, 5);
 
-    nextPage(context, LearnSpecificCategoryPage(mediaController));
+    replaceCurrentPage(context, LearnSpecificCategoryPage(mediaController));
   }
 }

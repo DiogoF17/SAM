@@ -14,6 +14,6 @@ class LoadActionForPlayCategories extends LoadAction {
   void execute(BuildContext context) async {
     List<Category> categories = await loadCategories();
 
-    nextPage(context, PlayCategoriesPage(categories));
+    replaceCurrentPage(context, PlayCategoriesPage(categories));
   }
 }

@@ -8,6 +8,8 @@ import '../database/media.dart';
 import "../utils/videoPlayer.dart";
 import 'dart:async';
 
+import 'gameOver.dart';
+
 class PlaySpecificCategoryPage extends StatefulWidget {
   final Category category;
   List<Media> media = [];
@@ -134,13 +136,18 @@ class _PlaySpecificCategoryPageState extends State<PlaySpecificCategoryPage> {
            // if the answer is correct
            if(name == targetMedia.name) {
              Future.delayed(Duration(milliseconds: 500), (){
-               nextPage(
-                   context,
-                   PlaySpecificCategoryPage(
-                       widget.category,
-                       widget.media,
-                       widget.sequence,
-                       widget.pageNumber + 1));
+               if ((widget.sequence.length - 1) == widget.pageNumber){
+                 nextPage(context, const GameOver());
+               }
+               else {
+                 nextPage(
+                     context,
+                     PlaySpecificCategoryPage(
+                         widget.category,
+                         widget.media,
+                         widget.sequence,
+                         widget.pageNumber + 1));
+               }
              });
              return const Icon(
                Icons.check,

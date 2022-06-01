@@ -99,11 +99,11 @@ class _LearnSpecificCategoryPageState extends State<LearnSpecificCategoryPage> {
   }
 
   Widget displayMedia() {
-    if (widget.category.mediaType == MediaType.video) {
+    /*if (widget.category.mediaType == MediaType.video) {
       return displayVideo();
-    } else {
+    } else {*/
       return displayImage();
-    }
+    //}
   }
 
   Widget displayImage() {

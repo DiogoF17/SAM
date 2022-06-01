@@ -28,8 +28,6 @@ class HomePage extends StatelessWidget {
                 action: () => {nextPage(context, const LearnCategoriesPage())}),
             getButton("Créditos", 150.0,
                 action: () => {nextPage(context, const CreditsPage())}),
-            getButton("Acabou", 150.0,
-                action: () => {nextPage(context, const GameOver())}),
           ],
         ));
   }

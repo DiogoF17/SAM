@@ -1,8 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'dart:async';
 import 'package:audioplayers/audioplayers.dart';
 
+import '../database/sound.dart';
 import "../utils/utils.dart";
 import "../utils/mediaController.dart";
 
@@ -62,10 +64,11 @@ class _PlaySpecificCategoryPageState extends State<PlaySpecificCategoryPage> {
                   const SizedBox(height: 100.0),
                   topBarSpecificCategoriesPage(context),
                   subtitleSpecificCategoriesPage(
-                      context, widget.mediaController.getCategoryName()),
-                  const SizedBox(height: 40.0),
+                      context, widget.mediaController.getCategoryName(),"Jogar"),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.05),
                   Expanded(
                       child: GridView.count(
+                        padding: const EdgeInsets.all(0),
                           crossAxisCount: 2,
                           mainAxisSpacing: 15,
                           crossAxisSpacing: 15,
@@ -102,9 +105,10 @@ class _PlaySpecificCategoryPageState extends State<PlaySpecificCategoryPage> {
 
   Widget displaySoundButton() {
     if (widget.mediaController.hasSounds()) {
-      return hearSoundButton(targetMedia.name,
+      Sound sound = widget.mediaController.getCurrentSound();
+      return hearSoundButton(sound.name,
           action: () =>
-              playAudio(widget.mediaController.getPathOfCurrentSound()));
+              playAudio(sound.path));
     } else {
       return hearSoundButton(targetMedia.name,
           action: () => speak(targetMedia.name));

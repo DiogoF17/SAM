@@ -1,15 +1,12 @@
 class Category {
   String id;
   String name;
-  MediaType mediaType;
+  bool hasSound;
 
-  Category(this.id, this.name, this.mediaType);
+  Category(this.id, this.name, this.hasSound);
 
   @override
   static Category fromJSON(String id, Map<String, dynamic> json) {
-    return Category(id, json["name"],
-        json["mediaType"] == "imagens" ? MediaType.image : MediaType.video);
+    return Category(id, json["name"],json["hasSound"]);
   }
 }
-
-enum MediaType { video, image }

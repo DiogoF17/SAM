@@ -25,14 +25,14 @@ class MediaController {
     return sounds.isNotEmpty;
   }
 
-  String getPathOfCurrentSound() {
+  Sound getCurrentSound() {
     String soundId = getTargetMedia().soundId;
 
     for (Sound sound in sounds) {
-      if (sound.id == soundId) return sound.path;
+      if (sound.id == soundId) return sound;
     }
 
-    return "";
+    return Sound("null", "null", "null", "null");
   }
 
   String getCategoryName() {

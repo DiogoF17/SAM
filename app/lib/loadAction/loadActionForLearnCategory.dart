@@ -22,7 +22,7 @@ class LoadActionForLearnCategory extends LoadAction {
     List<MyImage> media = await loadMedia(category);
     MediaController mediaController = MediaController(category, media, 5);
 
-    if (mediaController.hasSounds()) {
+    if (category.hasSound) {
       List<Sound> sounds = await loadSounds(category);
       mediaController.setSounds(sounds);
     }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:audioplayers/audioplayers.dart';
 
+import '../database/sound.dart';
 import "../utils/utils.dart";
 import '../database/image.dart';
 import "../utils/mediaController.dart";
@@ -54,9 +55,9 @@ class _LearnSpecificCategoryPageState extends State<LearnSpecificCategoryPage> {
                   topBarSpecificCategoriesPage(context),
                   const SizedBox(height: 20.0),
                   subtitleSpecificCategoriesPage(
-                      context, widget.mediaController.getCategoryName()),
+                      context, widget.mediaController.getCategoryName(),"Aprender"),
                   const SizedBox(height: 50.0),
-                  displayMedia(),
+                  Expanded(child: displayMedia()),
                   const SizedBox(height: 110.0),
                   displaySoundButton(),
                   const SizedBox(height: 20.0),
@@ -67,9 +68,10 @@ class _LearnSpecificCategoryPageState extends State<LearnSpecificCategoryPage> {
 
   Widget displaySoundButton() {
     if (widget.mediaController.hasSounds()) {
-      return hearSoundButton(targetMedia.name,
+      Sound sound = widget.mediaController.getCurrentSound();
+      return hearSoundButton(sound.name,
           action: () =>
-              playAudio(widget.mediaController.getPathOfCurrentSound()));
+              playAudio(sound.path));
     } else {
       return hearSoundButton(targetMedia.name,
           action: () => speak(targetMedia.name));

@@ -54,8 +54,8 @@ class _LearnSpecificCategoryPageState extends State<LearnSpecificCategoryPage> {
                   const SizedBox(height: 100.0),
                   topBarSpecificCategoriesPage(context),
                   const SizedBox(height: 20.0),
-                  subtitleSpecificCategoriesPage(
-                      context, widget.mediaController.getCategoryName(),"Aprender"),
+                  subtitleSpecificCategoriesPage(context,
+                      widget.mediaController.getCategoryName(), "Aprender"),
                   const SizedBox(height: 50.0),
                   Expanded(child: displayMedia()),
                   const SizedBox(height: 110.0),
@@ -69,9 +69,7 @@ class _LearnSpecificCategoryPageState extends State<LearnSpecificCategoryPage> {
   Widget displaySoundButton() {
     if (widget.mediaController.hasSounds()) {
       Sound sound = widget.mediaController.getCurrentSound();
-      return hearSoundButton(sound.name,
-          action: () =>
-              playAudio(sound.path));
+      return hearSoundButton(sound.name, action: () => playAudio(sound.path));
     } else {
       return hearSoundButton(targetMedia.name,
           action: () => speak(targetMedia.name));
@@ -88,9 +86,7 @@ class _LearnSpecificCategoryPageState extends State<LearnSpecificCategoryPage> {
               // fit: BoxFit.cover,
               loadingBuilder: (context, child, loadingProgress) {
                 if (loadingProgress == null) return child;
-                return const Center(
-                  child: Text("loading"),
-                );
+                return loadingScreen();
               },
             ),
             borderRadius: BorderRadius.circular(buttonRadius)));

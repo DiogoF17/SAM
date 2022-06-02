@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import "../utils/utils.dart";
 
 import 'package:app/pages/loadingScreen.dart';
+import 'package:app/pages/home.dart';
 
 import 'package:app/loadAction/loadActionForPlayCategories.dart';
-import 'package:app/loadAction/loadActionForLearnCategories.dart';
 
 class GameOver extends StatelessWidget {
   const GameOver({Key? key}) : super(key: key);
@@ -17,23 +17,17 @@ class GameOver extends StatelessWidget {
         child: Column(children: <Widget>[
           const SizedBox(height: 100.0),
           getTitle(),
-          const SizedBox(height: 20.0),
-          getPersonalizedText("Fim do jogo"),
           const SizedBox(height: 100.0),
-          getPersonalizedText("Experimenta outra categoria!"),
-          getButton("Jogar", 150.0,
+          getPersonalizedText("Fim do jogo!", fontSize: 30.0),
+          const SizedBox(height: 50.0),
+          getButton("Jogar Novamente", 150.0,
               action: () => {
-                    nextPage(
+                    replaceCurrentPage(
                         context, LoadingScreen(LoadActionForPlayCategories()))
                   }),
           const SizedBox(height: 10.0),
-          getPersonalizedText("Aprende novas categorias!"),
-          getButton("Aprender", 150.0,
-              action: () => {
-                    nextPage(
-                        context, LoadingScreen(LoadActionForLearnCategories()))
-                  }),
-          homePageIcon(context),
+          getButton("Página Inicial", 150.0,
+              action: () => {replaceCurrentPage(context, const HomePage())}),
         ]));
   }
 }

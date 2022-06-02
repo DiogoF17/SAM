@@ -64,23 +64,23 @@ Widget errorScreen() {
 }
 
 Widget hearSoundButton(String soundName, {action}) {
-  return Container(
-      decoration: BoxDecoration(
-          color: const Color.fromARGB(255, 38, 75, 130),
-          borderRadius: BorderRadius.circular(buttonRadius)),
-      padding:
-          const EdgeInsets.only(top: 7.5, bottom: 7.5, left: 20, right: 20),
-      child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            getPersonalizedText(capitalize(soundName)),
-            Column(children: <Widget>[
-              IconButton(
-                  icon: Icon(Icons.volume_up, color: Colors.white),
-                  onPressed: action),
-              getPersonalizedText("Ouvir Novamente", fontSize: 13.0)
-            ])
-          ]));
+  return InkWell(
+      onTap: action,
+      child: Container(
+          decoration: BoxDecoration(
+              color: const Color.fromARGB(255, 38, 75, 130),
+              borderRadius: BorderRadius.circular(buttonRadius)),
+          padding:
+              const EdgeInsets.only(top: 15, bottom: 15, left: 20, right: 20),
+          child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                getPersonalizedText(capitalize(soundName)),
+                Column(children: <Widget>[
+                  const Icon(Icons.volume_up, color: Colors.white),
+                  getPersonalizedText("Ouvir Novamente", fontSize: 13.0)
+                ])
+              ])));
 }
 
 Widget homePageIcon(BuildContext context) {
@@ -103,7 +103,7 @@ Widget topBarSpecificCategoriesPage(BuildContext context) {
         getTitle(),
         IconButton(
             icon: const Icon(Icons.home, color: Colors.white, size: 35.0),
-            onPressed: () => {clearNavigationStack(context, HomePage())})
+            onPressed: () => {clearNavigationStack(context, const HomePage())})
       ]);
 }
 

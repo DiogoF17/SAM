@@ -20,7 +20,8 @@ class LoadActionForLearnCategory extends LoadAction {
   @override
   void execute(BuildContext context) async {
     List<MyImage> media = await loadMedia(category);
-    MediaController mediaController = MediaController(category, media, 5);
+    MediaController mediaController =
+        MediaController(category, media, media.length);
 
     if (category.hasSound) {
       List<Sound> sounds = await loadSounds(category);

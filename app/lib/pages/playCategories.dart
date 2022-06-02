@@ -5,6 +5,7 @@ import "../utils/utils.dart";
 import "../loadAction/loadActionForPlayCategory.dart";
 
 import "./loadingScreen.dart";
+import "./home.dart";
 
 import "../database/category.dart";
 
@@ -33,7 +34,8 @@ class _PlayCategoriesPageState extends State<PlayCategoriesPage> {
           Column(children: getCategoriesWidgets(context)),
           Column(children: <Widget>[
             const SizedBox(height: 20.0),
-            getButton("Voltar", 100.0, action: () => {previousPage(context)}),
+            getButton("Voltar", 100.0,
+                action: () => {replaceCurrentPage(context, const HomePage())}),
             const SizedBox(height: 20.0)
           ])
         ]));

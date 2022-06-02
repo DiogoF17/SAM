@@ -63,12 +63,12 @@ class _PlaySpecificCategoryPageState extends State<PlaySpecificCategoryPage> {
                 child: Column(children: <Widget>[
                   const SizedBox(height: 100.0),
                   topBarSpecificCategoriesPage(context),
-                  subtitleSpecificCategoriesPage(
-                      context, widget.mediaController.getCategoryName(),"Jogar"),
+                  subtitleSpecificCategoriesPage(context,
+                      widget.mediaController.getCategoryName(), "Jogar"),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.05),
                   Expanded(
                       child: GridView.count(
-                        padding: const EdgeInsets.all(0),
+                          padding: const EdgeInsets.all(0),
                           crossAxisCount: 2,
                           mainAxisSpacing: 15,
                           crossAxisSpacing: 15,
@@ -92,9 +92,7 @@ class _PlaySpecificCategoryPageState extends State<PlaySpecificCategoryPage> {
                 // fit: BoxFit.cover,
                 loadingBuilder: (context, child, loadingProgress) {
                   if (loadingProgress == null) return child;
-                  return const Center(
-                    child: Text("loading"),
-                  );
+                  return loadingScreen();
                 },
               ),
               borderRadius: BorderRadius.circular(buttonRadius))));
@@ -106,9 +104,7 @@ class _PlaySpecificCategoryPageState extends State<PlaySpecificCategoryPage> {
   Widget displaySoundButton() {
     if (widget.mediaController.hasSounds()) {
       Sound sound = widget.mediaController.getCurrentSound();
-      return hearSoundButton(sound.name,
-          action: () =>
-              playAudio(sound.path));
+      return hearSoundButton(sound.name, action: () => playAudio(sound.path));
     } else {
       return hearSoundButton(targetMedia.name,
           action: () => speak(targetMedia.name));

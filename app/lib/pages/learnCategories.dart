@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'loadingScreen.dart';
+import 'home.dart';
 
 import "../utils/utils.dart";
 
@@ -33,7 +34,8 @@ class _LearnCategoriesPageState extends State<LearnCategoriesPage> {
           Column(children: getCategoriesWidgets(context)),
           Column(children: <Widget>[
             const SizedBox(height: 20.0),
-            getButton("Voltar", 100.0, action: () => {previousPage(context)}),
+            getButton("Voltar", 100.0,
+                action: () => {replaceCurrentPage(context, const HomePage())}),
             const SizedBox(height: 20.0)
           ])
         ]));

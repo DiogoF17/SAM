@@ -43,6 +43,10 @@ class _LearnSpecificCategoryPageState extends State<LearnSpecificCategoryPage> {
     await audioPlayer.play(path);
   }
 
+  void stopAudio() async {
+    await audioPlayer.stop();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,7 +56,7 @@ class _LearnSpecificCategoryPageState extends State<LearnSpecificCategoryPage> {
                 padding: const EdgeInsets.only(left: 10, right: 10),
                 child: Column(children: <Widget>[
                   const SizedBox(height: 100.0),
-                  topBarSpecificCategoriesPage(context),
+                  topBarSpecificCategoriesPage(context,audioPlayer),
                   const SizedBox(height: 20.0),
                   subtitleSpecificCategoriesPage(context,
                       widget.mediaController.getCategoryName(), "Aprender"),
@@ -99,6 +103,7 @@ class _LearnSpecificCategoryPageState extends State<LearnSpecificCategoryPage> {
           children: <Widget>[
             getButton("Próximo", 175.0, action: () {
               widget.mediaController.goToNextMedia();
+              stopAudio();
               nextPage(
                   context, LearnSpecificCategoryPage(widget.mediaController));
             })
@@ -122,6 +127,7 @@ class _LearnSpecificCategoryPageState extends State<LearnSpecificCategoryPage> {
             }),
             getButton("Próximo", 175.0, action: () {
               widget.mediaController.goToNextMedia();
+              stopAudio();
               nextPage(
                   context, LearnSpecificCategoryPage(widget.mediaController));
             })

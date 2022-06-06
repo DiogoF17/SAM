@@ -53,6 +53,10 @@ class _PlaySpecificCategoryPageState extends State<PlaySpecificCategoryPage> {
     await audioPlayer.play(path);
   }
 
+  void stopAudio() async {
+    await audioPlayer.stop();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,7 +66,7 @@ class _PlaySpecificCategoryPageState extends State<PlaySpecificCategoryPage> {
                 padding: const EdgeInsets.only(left: 10, right: 10),
                 child: Column(children: <Widget>[
                   const SizedBox(height: 100.0),
-                  topBarSpecificCategoriesPage(context),
+                  topBarSpecificCategoriesPage(context,audioPlayer),
                   subtitleSpecificCategoriesPage(context,
                       widget.mediaController.getCategoryName(), "Jogar"),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.05),
@@ -120,6 +124,7 @@ class _PlaySpecificCategoryPageState extends State<PlaySpecificCategoryPage> {
           if (name == targetMedia.name) {
             widget.mediaController.goToNextMedia();
             Future.delayed(Duration(milliseconds: 500), () {
+              stopAudio();
               if (widget.mediaController.isLastMedia()) {
                 nextPage(context, const GameOver());
               } else {

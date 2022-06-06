@@ -1,4 +1,5 @@
 import 'package:app/pages/home.dart';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 
 const appTitle = "Little Learner";
@@ -96,14 +97,17 @@ Widget homePageIcon(BuildContext context) {
   );
 }
 
-Widget topBarSpecificCategoriesPage(BuildContext context) {
+Widget topBarSpecificCategoriesPage(BuildContext context, AudioPlayer audioPlayer) {
   return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
         getTitle(),
         IconButton(
             icon: const Icon(Icons.home, color: Colors.white, size: 35.0),
-            onPressed: () => {clearNavigationStack(context, const HomePage())})
+            onPressed: () {
+              audioPlayer.stop();
+              clearNavigationStack(context, const HomePage());
+            })
       ]);
 }
 

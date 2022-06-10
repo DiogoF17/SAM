@@ -2,6 +2,14 @@ import "media.dart";
 
 class MyImage extends Media {
   String soundId = "";
+  String pathLearnMore = "";
+
+  // MyImage(String id, String name, String path, String pathLearnMore,
+  //     String soundId_)
+  //     : super(id: id, name: name, path: path) {
+  //   soundId = soundId_;
+  //   pathLearnMore = pathLearnMore;
+  // }
 
   MyImage(String id, String name, String path, String soundId_)
       : super(id: id, name: name, path: path) {
@@ -11,5 +19,6 @@ class MyImage extends Media {
   @override
   static MyImage fromJSON(String id, Map<String, dynamic> json) {
     return MyImage(id, json["name"], json["path"], json["soundId"]);
+    // id, json["name"], json["path"], json["pathLearnMore"], json["soundId"]);
   }
 }

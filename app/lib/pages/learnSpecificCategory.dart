@@ -6,6 +6,7 @@ import '../database/sound.dart';
 import "../utils/utils.dart";
 import '../database/image.dart';
 import "../utils/mediaController.dart";
+import "./learnMore.dart";
 
 class LearnSpecificCategoryPage extends StatefulWidget {
   final MediaController mediaController;
@@ -56,18 +57,42 @@ class _LearnSpecificCategoryPageState extends State<LearnSpecificCategoryPage> {
                 padding: const EdgeInsets.only(left: 10, right: 10),
                 child: Column(children: <Widget>[
                   const SizedBox(height: 100.0),
-                  topBarSpecificCategoriesPage(context,audioPlayer),
+                  topBarSpecificCategoriesPage(context, audioPlayer),
                   const SizedBox(height: 20.0),
                   subtitleSpecificCategoriesPage(context,
                       widget.mediaController.getCategoryName(), "Aprender"),
                   const SizedBox(height: 50.0),
                   Expanded(child: displayMedia()),
                   const SizedBox(height: 110.0),
+                  displayLearnMoreButton(),
+                  const SizedBox(height: 20.0),
                   displaySoundButton(),
                   const SizedBox(height: 20.0),
                   bottomButtons(context),
                   const SizedBox(height: 20.0)
                 ]))));
+  }
+
+  Widget displayLearnMoreButton() {
+    // if (targetMedia.pathLearnMore != "") {
+    return InkWell(
+        onTap: () {
+          nextPage(
+              context,
+              LearnMorePage(targetMedia.name,
+                  "https://www.youtube.com/watch?v=CA6Mofzh7jo"));
+        },
+        child: Container(
+            decoration: BoxDecoration(
+                color: const Color.fromARGB(255, 38, 75, 130),
+                borderRadius: BorderRadius.circular(buttonRadius)),
+            padding:
+                const EdgeInsets.only(top: 25, bottom: 25, left: 30, right: 30),
+            child: getPersonalizedText("Aprender Mais",
+                alignment: TextAlign.center)));
+    // }
+
+    // return const SizedBox(height: 0);
   }
 
   Widget displaySoundButton() {

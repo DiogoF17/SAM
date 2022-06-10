@@ -39,6 +39,7 @@ dependencies:
   firebase_database: ^9.0.13
   flutter_tts: ^3.3.3
   audioplayers: ^0.20.1
+  youtube_player_flutter: ^8.0.0
 
 dev_dependencies:
   flutter_test:

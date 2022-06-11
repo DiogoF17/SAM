@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import "../utils/utils.dart";
+import "../utils/backgroundMusicController.dart";
 
 import 'package:app/pages/loadingScreen.dart';
 import 'package:app/pages/home.dart';
@@ -8,10 +9,13 @@ import 'package:app/pages/home.dart';
 import 'package:app/loadAction/loadActionForPlayCategories.dart';
 
 class GameOver extends StatelessWidget {
-  const GameOver({Key? key}) : super(key: key);
+  BackgroundMusicController backgroundMusicController;
+
+  GameOver(this.backgroundMusicController, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    backgroundMusicController.play();
     return Container(
         color: getAppThemeColor(),
         child: Column(children: <Widget>[
@@ -23,11 +27,18 @@ class GameOver extends StatelessWidget {
           getButton("Jogar Novamente", 150.0,
               action: () => {
                     replaceCurrentPage(
-                        context, LoadingScreen(LoadActionForPlayCategories()))
+                        context,
+                        LoadingScreen(
+                            LoadActionForPlayCategories(
+                                backgroundMusicController),
+                            backgroundMusicController))
                   }),
           const SizedBox(height: 10.0),
           getButton("Página Inicial", 150.0,
-              action: () => {replaceCurrentPage(context, const HomePage())}),
+              action: () => {
+                    replaceCurrentPage(
+                        context, HomePage(backgroundMusicController))
+                  }),
         ]));
   }
 }

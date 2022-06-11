@@ -2,13 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import "../utils/utils.dart";
+import "../utils/backgroundMusicController.dart";
+
 import "./home.dart";
 
 class LearnMorePage extends StatefulWidget {
   final String name;
   final String path;
+  BackgroundMusicController backgroundMusicController;
 
-  const LearnMorePage(this.name, this.path, {Key? key}) : super(key: key);
+  LearnMorePage(this.name, this.path, this.backgroundMusicController,
+      {Key? key})
+      : super(key: key);
 
   @override
   State<LearnMorePage> createState() => _LearnMorePageState();
@@ -41,6 +46,7 @@ class _LearnMorePageState extends State<LearnMorePage> {
 
   @override
   Widget build(BuildContext context) {
+    widget.backgroundMusicController.pause();
     return YoutubePlayerBuilder(
         player: YoutubePlayer(controller: _controller),
         builder: (context, player) => Scaffold(
@@ -72,7 +78,8 @@ class _LearnMorePageState extends State<LearnMorePage> {
           IconButton(
               icon: const Icon(Icons.home, color: Colors.white, size: 35.0),
               onPressed: () {
-                clearNavigationStack(context, const HomePage());
+                clearNavigationStack(
+                    context, HomePage(widget.backgroundMusicController));
               })
         ]);
   }

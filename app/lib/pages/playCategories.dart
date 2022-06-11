@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import "../utils/utils.dart";
+import "../utils/backgroundMusicController.dart";
 
 import "../loadAction/loadActionForPlayCategory.dart";
 
@@ -11,8 +12,11 @@ import "../database/category.dart";
 
 class PlayCategoriesPage extends StatefulWidget {
   final List<Category> categories;
+  BackgroundMusicController backgroundMusicController;
 
-  const PlayCategoriesPage(this.categories, {Key? key}) : super(key: key);
+  PlayCategoriesPage(this.categories, this.backgroundMusicController,
+      {Key? key})
+      : super(key: key);
 
   @override
   State<PlayCategoriesPage> createState() => _PlayCategoriesPageState();
@@ -21,6 +25,7 @@ class PlayCategoriesPage extends StatefulWidget {
 class _PlayCategoriesPageState extends State<PlayCategoriesPage> {
   @override
   Widget build(BuildContext context) {
+    widget.backgroundMusicController.play();
     return Container(
         color: getAppThemeColor(),
         child: ListView(children: <Widget>[
@@ -35,7 +40,10 @@ class _PlayCategoriesPageState extends State<PlayCategoriesPage> {
           Column(children: <Widget>[
             const SizedBox(height: 20.0),
             getButton("Voltar", 100.0,
-                action: () => {replaceCurrentPage(context, const HomePage())}),
+                action: () => {
+                      replaceCurrentPage(
+                          context, HomePage(widget.backgroundMusicController))
+                    }),
             const SizedBox(height: 20.0)
           ])
         ]));
@@ -47,10 +55,14 @@ class _PlayCategoriesPageState extends State<PlayCategoriesPage> {
     for (Category category in widget.categories) {
       categoriesWidget.add(Container(
           child: getButton("Categoria: " + capitalize(category.name), 350.0,
-              action: () => {
-                    nextPage(context,
-                        LoadingScreen(LoadActionForPlayCategory(category)))
-                  })));
+              action: () {
+        nextPage(
+            context,
+            LoadingScreen(
+                LoadActionForPlayCategory(
+                    category, widget.backgroundMusicController),
+                widget.backgroundMusicController));
+      })));
     }
 
     return categoriesWidget;

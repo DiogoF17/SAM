@@ -4,15 +4,19 @@ import 'loadingScreen.dart';
 import 'home.dart';
 
 import "../utils/utils.dart";
+import "../utils/backgroundMusicController.dart";
 
 import "../database/category.dart";
 
 import "../loadAction/loadActionForLearnCategory.dart";
 
 class LearnCategoriesPage extends StatefulWidget {
+  BackgroundMusicController backgroundMusicController;
   final List<Category> categories;
 
-  const LearnCategoriesPage(this.categories, {Key? key}) : super(key: key);
+  LearnCategoriesPage(this.backgroundMusicController, this.categories,
+      {Key? key})
+      : super(key: key);
 
   @override
   State<LearnCategoriesPage> createState() => _LearnCategoriesPageState();
@@ -21,6 +25,7 @@ class LearnCategoriesPage extends StatefulWidget {
 class _LearnCategoriesPageState extends State<LearnCategoriesPage> {
   @override
   Widget build(BuildContext context) {
+    widget.backgroundMusicController.play();
     return Container(
         color: getAppThemeColor(),
         child: ListView(children: <Widget>[
@@ -35,7 +40,10 @@ class _LearnCategoriesPageState extends State<LearnCategoriesPage> {
           Column(children: <Widget>[
             const SizedBox(height: 20.0),
             getButton("Voltar", 100.0,
-                action: () => {replaceCurrentPage(context, const HomePage())}),
+                action: () => {
+                      replaceCurrentPage(
+                          context, HomePage(widget.backgroundMusicController))
+                    }),
             const SizedBox(height: 20.0)
           ])
         ]));
@@ -47,10 +55,14 @@ class _LearnCategoriesPageState extends State<LearnCategoriesPage> {
     for (Category category in widget.categories) {
       categoriesWidget.add(Container(
           child: getButton("Categoria: " + capitalize(category.name), 350.0,
-              action: () => {
-                    nextPage(context,
-                        LoadingScreen(LoadActionForLearnCategory(category)))
-                  })));
+              action: () {
+        nextPage(
+            context,
+            LoadingScreen(
+                LoadActionForLearnCategory(
+                    category, widget.backgroundMusicController),
+                widget.backgroundMusicController));
+      })));
     }
 
     return categoriesWidget;

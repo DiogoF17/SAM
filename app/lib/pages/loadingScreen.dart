@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 
 import "../utils/utils.dart";
+import "../utils/backgroundMusicController.dart";
 import "../loadAction/loadAction.dart";
 
 class LoadingScreen extends StatefulWidget {
   final LoadAction loadAction;
+  BackgroundMusicController backgroundMusicController;
 
-  LoadingScreen(this.loadAction, {Key? key}) : super(key: key);
+  LoadingScreen(this.loadAction, this.backgroundMusicController, {Key? key})
+      : super(key: key);
 
   @override
   State<LoadingScreen> createState() => _LoadingScreenState();
@@ -22,6 +25,7 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
   @override
   Widget build(BuildContext context) {
+    widget.backgroundMusicController.play();
     return Scaffold(
         body: Container(color: getAppThemeColor(), child: loadingScreen()));
   }

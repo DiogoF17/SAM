@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import "../utils/utils.dart";
+import "../utils/backgroundMusicController.dart";
 
 import 'package:app/pages/loadingScreen.dart';
 import 'package:app/pages/credits.dart';
@@ -11,10 +12,13 @@ import 'package:app/loadAction/loadActionForPlayCategories.dart';
 import 'package:app/loadAction/loadActionForLearnCategories.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+  final BackgroundMusicController backgroundMusicController;
+
+  const HomePage(this.backgroundMusicController, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    backgroundMusicController.play();
     runDBOperations();
     return Container(
         color: getAppThemeColor(),
@@ -27,15 +31,25 @@ class HomePage extends StatelessWidget {
             getButton("Jogar", 150.0,
                 action: () => {
                       nextPage(
-                          context, LoadingScreen(LoadActionForPlayCategories()))
+                          context,
+                          LoadingScreen(
+                              LoadActionForPlayCategories(
+                                  backgroundMusicController),
+                              backgroundMusicController))
                     }),
             getButton("Aprender", 150.0,
                 action: () => {
-                      nextPage(context,
-                          LoadingScreen(LoadActionForLearnCategories()))
+                      nextPage(
+                          context,
+                          LoadingScreen(
+                              LoadActionForLearnCategories(
+                                  backgroundMusicController),
+                              backgroundMusicController))
                     }),
             getButton("Créditos", 150.0,
-                action: () => {nextPage(context, const CreditsPage())}),
+                action: () => {
+                      nextPage(context, CreditsPage(backgroundMusicController))
+                    }),
           ],
         ));
   }

@@ -6,6 +6,7 @@ import 'package:audioplayers/audioplayers.dart';
 
 import '../database/sound.dart';
 import "../utils/utils.dart";
+import "../utils/backgroundMusicController.dart";
 import "../utils/mediaController.dart";
 
 import '../database/image.dart';
@@ -14,8 +15,11 @@ import 'gameOver.dart';
 
 class PlaySpecificCategoryPage extends StatefulWidget {
   final MediaController mediaController;
+  BackgroundMusicController backgroundMusicController;
 
-  PlaySpecificCategoryPage(this.mediaController, {Key? key}) : super(key: key);
+  PlaySpecificCategoryPage(this.mediaController, this.backgroundMusicController,
+      {Key? key})
+      : super(key: key);
 
   @override
   State<PlaySpecificCategoryPage> createState() =>
@@ -59,6 +63,7 @@ class _PlaySpecificCategoryPageState extends State<PlaySpecificCategoryPage> {
 
   @override
   Widget build(BuildContext context) {
+    widget.backgroundMusicController.pause();
     return Scaffold(
         body: Container(
             color: getAppThemeColor(),
@@ -66,7 +71,8 @@ class _PlaySpecificCategoryPageState extends State<PlaySpecificCategoryPage> {
                 padding: const EdgeInsets.only(left: 10, right: 10),
                 child: Column(children: <Widget>[
                   const SizedBox(height: 100.0),
-                  topBarSpecificCategoriesPage(context,audioPlayer),
+                  topBarSpecificCategoriesPage(
+                      context, audioPlayer, widget.backgroundMusicController),
                   subtitleSpecificCategoriesPage(context,
                       widget.mediaController.getCategoryName(), "Jogar"),
                   SizedBox(height: MediaQuery.of(context).size.height * 0.05),
@@ -126,10 +132,12 @@ class _PlaySpecificCategoryPageState extends State<PlaySpecificCategoryPage> {
             Future.delayed(Duration(milliseconds: 500), () {
               stopAudio();
               if (widget.mediaController.isLastMedia()) {
-                nextPage(context, const GameOver());
+                nextPage(context, GameOver(widget.backgroundMusicController));
               } else {
                 nextPage(
-                    context, PlaySpecificCategoryPage(widget.mediaController));
+                    context,
+                    PlaySpecificCategoryPage(widget.mediaController,
+                        widget.backgroundMusicController));
               }
             });
             return const Icon(

@@ -4,14 +4,19 @@ import 'package:audioplayers/audioplayers.dart';
 
 import '../database/sound.dart';
 import "../utils/utils.dart";
+import "../utils/backgroundMusicController.dart";
 import '../database/image.dart';
 import "../utils/mediaController.dart";
 import "./learnMore.dart";
 
 class LearnSpecificCategoryPage extends StatefulWidget {
   final MediaController mediaController;
+  BackgroundMusicController backgroundMusicController;
 
-  LearnSpecificCategoryPage(this.mediaController, {Key? key}) : super(key: key);
+  LearnSpecificCategoryPage(
+      this.mediaController, this.backgroundMusicController,
+      {Key? key})
+      : super(key: key);
 
   @override
   State<LearnSpecificCategoryPage> createState() =>
@@ -50,6 +55,7 @@ class _LearnSpecificCategoryPageState extends State<LearnSpecificCategoryPage> {
 
   @override
   Widget build(BuildContext context) {
+    widget.backgroundMusicController.pause();
     return Scaffold(
         body: Container(
             color: getAppThemeColor(),
@@ -57,7 +63,8 @@ class _LearnSpecificCategoryPageState extends State<LearnSpecificCategoryPage> {
                 padding: const EdgeInsets.only(left: 10, right: 10),
                 child: Column(children: <Widget>[
                   const SizedBox(height: 100.0),
-                  topBarSpecificCategoriesPage(context, audioPlayer),
+                  topBarSpecificCategoriesPage(
+                      context, audioPlayer, widget.backgroundMusicController),
                   const SizedBox(height: 20.0),
                   subtitleSpecificCategoriesPage(context,
                       widget.mediaController.getCategoryName(), "Aprender"),
@@ -79,8 +86,10 @@ class _LearnSpecificCategoryPageState extends State<LearnSpecificCategoryPage> {
         onTap: () {
           nextPage(
               context,
-              LearnMorePage(targetMedia.name,
-                  "https://www.youtube.com/watch?v=CA6Mofzh7jo"));
+              LearnMorePage(
+                  targetMedia.name,
+                  "https://www.youtube.com/watch?v=CA6Mofzh7jo",
+                  widget.backgroundMusicController));
         },
         child: Container(
             decoration: BoxDecoration(
@@ -130,7 +139,9 @@ class _LearnSpecificCategoryPageState extends State<LearnSpecificCategoryPage> {
               widget.mediaController.goToNextMedia();
               stopAudio();
               nextPage(
-                  context, LearnSpecificCategoryPage(widget.mediaController));
+                  context,
+                  LearnSpecificCategoryPage(widget.mediaController,
+                      widget.backgroundMusicController));
             })
           ]);
     } else if (widget.mediaController.isLastMedia()) {
@@ -154,7 +165,9 @@ class _LearnSpecificCategoryPageState extends State<LearnSpecificCategoryPage> {
               widget.mediaController.goToNextMedia();
               stopAudio();
               nextPage(
-                  context, LearnSpecificCategoryPage(widget.mediaController));
+                  context,
+                  LearnSpecificCategoryPage(widget.mediaController,
+                      widget.backgroundMusicController));
             })
           ]);
     }

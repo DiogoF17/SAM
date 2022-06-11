@@ -8,6 +8,7 @@ import "../database/sound.dart";
 import "../database/category.dart";
 
 import "../utils/utils.dart";
+import "../utils/backgroundMusicController.dart";
 import "../utils/mediaController.dart";
 
 import "../pages/playSpecificCategory.dart";
@@ -15,7 +16,9 @@ import "../pages/playSpecificCategory.dart";
 class LoadActionForPlayCategory extends LoadAction {
   final Category category;
 
-  LoadActionForPlayCategory(this.category);
+  LoadActionForPlayCategory(
+      this.category, BackgroundMusicController backgroundMusicController)
+      : super(backgroundMusicController);
 
   @override
   void execute(BuildContext context) async {
@@ -27,6 +30,7 @@ class LoadActionForPlayCategory extends LoadAction {
       mediaController.setSounds(sounds);
     }
 
-    replaceCurrentPage(context, PlaySpecificCategoryPage(mediaController));
+    replaceCurrentPage(context,
+        PlaySpecificCategoryPage(mediaController, backgroundMusicController));
   }
 }

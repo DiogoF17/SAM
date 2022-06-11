@@ -2,6 +2,8 @@ import 'package:app/pages/home.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 
+import "./backgroundMusicController.dart";
+
 const appTitle = "Little Learner";
 
 // buttons
@@ -84,20 +86,26 @@ Widget hearSoundButton(String soundName, {action}) {
               ])));
 }
 
-Widget homePageIcon(BuildContext context) {
+Widget homePageIcon(
+    BuildContext context, BackgroundMusicController backgroundMusicController) {
   return Material(
     color: getAppThemeColor(),
     child: Center(
       child: IconButton(
         icon: const Icon(Icons.home),
         color: Colors.white,
-        onPressed: () => {clearNavigationStack(context, HomePage())},
+        onPressed: () => {
+          clearNavigationStack(context, HomePage(backgroundMusicController))
+        },
       ),
     ),
   );
 }
 
-Widget topBarSpecificCategoriesPage(BuildContext context, AudioPlayer audioPlayer) {
+Widget topBarSpecificCategoriesPage(
+    BuildContext context,
+    AudioPlayer audioPlayer,
+    BackgroundMusicController backgroundMusicController) {
   return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
@@ -106,7 +114,8 @@ Widget topBarSpecificCategoriesPage(BuildContext context, AudioPlayer audioPlaye
             icon: const Icon(Icons.home, color: Colors.white, size: 35.0),
             onPressed: () {
               audioPlayer.stop();
-              clearNavigationStack(context, const HomePage());
+              clearNavigationStack(
+                  context, HomePage(backgroundMusicController));
             })
       ]);
 }

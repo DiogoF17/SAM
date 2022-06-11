@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 
 import "../utils/utils.dart";
+import "../utils/backgroundMusicController.dart";
 
 class CreditsPage extends StatelessWidget {
-  const CreditsPage({Key? key}) : super(key: key);
+  BackgroundMusicController backgroundMusicController;
+
+  CreditsPage(this.backgroundMusicController, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    backgroundMusicController.play();
     return Container(
         color: getAppThemeColor(),
         child: Column(children: <Widget>[

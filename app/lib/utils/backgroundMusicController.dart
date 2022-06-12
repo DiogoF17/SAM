@@ -44,7 +44,7 @@ class BackgroundMusicController {
     if (!validMusic(musicNumber)) return;
 
     currentMusicPlaying = musicNumber;
-    play();
+    playFromStart();
   }
 
   bool validMusic(int musicNumber) {

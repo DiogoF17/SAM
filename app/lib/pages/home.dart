@@ -5,6 +5,7 @@ import "../utils/backgroundMusicController.dart";
 
 import 'package:app/pages/loadingScreen.dart';
 import 'package:app/pages/credits.dart';
+import 'package:app/pages/musics.dart';
 
 import 'package:app/database/database.dart';
 
@@ -19,7 +20,6 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     backgroundMusicController.play();
-    runDBOperations();
     return Container(
         color: getAppThemeColor(),
         child: Column(
@@ -46,6 +46,9 @@ class HomePage extends StatelessWidget {
                                   backgroundMusicController),
                               backgroundMusicController))
                     }),
+            getButton("Músicas", 150.0,
+                action: () =>
+                    {nextPage(context, MusicPage(backgroundMusicController))}),
             getButton("Créditos", 150.0,
                 action: () => {
                       nextPage(context, CreditsPage(backgroundMusicController))

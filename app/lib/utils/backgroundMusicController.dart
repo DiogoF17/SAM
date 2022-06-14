@@ -1,9 +1,11 @@
 import 'package:audioplayers/audioplayers.dart';
 
+import "../database/music.dart";
+
 class BackgroundMusicController {
-  List<String> musics = [
-    "https://luan.xyz/files/audio/ambient_c_motion.mp3",
-    "https://luan.xyz/files/audio/nasa_on_a_mission.mp3"
+  List<Music> musics = [
+    Music("music1", "https://luan.xyz/files/audio/ambient_c_motion.mp3"),
+    Music("music2", "https://luan.xyz/files/audio/nasa_on_a_mission.mp3")
   ];
   int currentMusicPlaying = 0;
 
@@ -26,7 +28,7 @@ class BackgroundMusicController {
 
   void playFromStart() {
     musicStarted = true;
-    audioPlayer.play(musics[currentMusicPlaying]);
+    audioPlayer.play(musics[currentMusicPlaying].path);
   }
 
   void resume() {

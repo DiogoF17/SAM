@@ -13,8 +13,7 @@ void createDatabaseStructure(int numEntries) {
     imgRef.set({"name": "nd", "path": "nd", "soundId": "nd"});
 
     DatabaseReference soundRef = databaseReference.child("sounds").push();
-    soundRef
-        .set({"name": "nd", "path": "nd", "categoryId": "nd"});
+    soundRef.set({"name": "nd", "path": "nd", "categoryId": "nd"});
 
     DatabaseReference categoriesRef =
         databaseReference.child("categories").push();
@@ -149,7 +148,7 @@ Future removeImageFromDB(String key) async {
 
 void addImageToDB(String name, String path, String categoryId, String soundId) {
   DatabaseReference imgRef = databaseReference.child("images").push();
-  imgRef.set({"name": name, "path": path, "soundId":soundId});
+  imgRef.set({"name": name, "path": path, "soundId": soundId});
   DatabaseReference categoriesImagesRef =
       databaseReference.child("categoriesImages").push();
   categoriesImagesRef.set({"categoryId": categoryId, "imageId": imgRef.key});
@@ -159,5 +158,3 @@ void addSoundToDB(String name, String path, String categoryId) {
   DatabaseReference soundRef = databaseReference.child("sounds").push();
   soundRef.set({"name": name, "path": path, "categoryId": categoryId});
 }
-
-void runDBOperations() {}

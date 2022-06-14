@@ -64,7 +64,12 @@ class _PlaySpecificCategoryPageState extends State<PlaySpecificCategoryPage> {
   @override
   Widget build(BuildContext context) {
     widget.backgroundMusicController.pause();
-    return Scaffold(
+    return WillPopScope(
+      onWillPop: () async {
+        if (widget.mediaController.isFirstMedia()) widget.backgroundMusicController.play();
+        return true;
+      },
+      child: Scaffold(
         body: Container(
             color: getAppThemeColor(),
             child: Padding(
@@ -85,7 +90,7 @@ class _PlaySpecificCategoryPageState extends State<PlaySpecificCategoryPage> {
                           children: displayMedia(context))),
                   displaySoundButton(),
                   const SizedBox(height: 20.0)
-                ]))));
+                ])))));
   }
 
   List<Widget> displayMedia(BuildContext context) {

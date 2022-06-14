@@ -56,7 +56,12 @@ class _LearnSpecificCategoryPageState extends State<LearnSpecificCategoryPage> {
   @override
   Widget build(BuildContext context) {
     widget.backgroundMusicController.pause();
-    return Scaffold(
+    return WillPopScope(
+      onWillPop: () async {
+        if (widget.mediaController.isFirstMedia()) widget.backgroundMusicController.play();
+        return true;
+      },
+      child: Scaffold(
         body: Container(
             color: getAppThemeColor(),
             child: Padding(
@@ -77,7 +82,7 @@ class _LearnSpecificCategoryPageState extends State<LearnSpecificCategoryPage> {
                   const SizedBox(height: 20.0),
                   bottomButtons(context),
                   const SizedBox(height: 20.0)
-                ]))));
+                ])))));
   }
 
   Widget displayLearnMoreButton() {

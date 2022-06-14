@@ -29,6 +29,9 @@ class BackgroundMusicController {
   void playFromStart() {
     musicStarted = true;
     audioPlayer.play(musics[currentMusicPlaying].path);
+    audioPlayer.onPlayerCompletion.listen((event) {
+      playFromStart();
+    });
   }
 
   void resume() {

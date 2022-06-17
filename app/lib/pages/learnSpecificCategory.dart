@@ -59,6 +59,8 @@ class _LearnSpecificCategoryPageState extends State<LearnSpecificCategoryPage> {
     return WillPopScope(
       onWillPop: () async {
         if (widget.mediaController.isFirstMedia()) widget.backgroundMusicController.play();
+        else widget.mediaController.goToPreviousMedia();
+        stopAudio();
         return true;
       },
       child: Scaffold(
@@ -86,27 +88,27 @@ class _LearnSpecificCategoryPageState extends State<LearnSpecificCategoryPage> {
   }
 
   Widget displayLearnMoreButton() {
-    // if (targetMedia.pathLearnMore != "") {
-    return InkWell(
-        onTap: () {
-          nextPage(
-              context,
-              LearnMorePage(
-                  targetMedia.name,
-                  "https://www.youtube.com/watch?v=CA6Mofzh7jo",
-                  widget.backgroundMusicController));
-        },
-        child: Container(
-            decoration: BoxDecoration(
-                color: const Color.fromARGB(255, 38, 75, 130),
-                borderRadius: BorderRadius.circular(buttonRadius)),
-            padding:
-                const EdgeInsets.only(top: 25, bottom: 25, left: 30, right: 30),
-            child: getPersonalizedText("Aprender Mais",
-                alignment: TextAlign.center)));
-    // }
+    if (targetMedia.pathLearnMore != "null") {
+      return InkWell(
+          onTap: () {
+            nextPage(
+                context,
+                LearnMorePage(
+                    targetMedia.name,
+                    targetMedia.pathLearnMore,
+                    widget.backgroundMusicController));
+          },
+          child: Container(
+              decoration: BoxDecoration(
+                  color: const Color.fromARGB(255, 38, 75, 130),
+                  borderRadius: BorderRadius.circular(buttonRadius)),
+              padding:
+                  const EdgeInsets.only(top: 25, bottom: 25, left: 30, right: 30),
+              child: getPersonalizedText("Aprender Mais",
+                  alignment: TextAlign.center)));
+    }
 
-    // return const SizedBox(height: 0);
+    return const SizedBox(height: 0);
   }
 
   Widget displaySoundButton() {

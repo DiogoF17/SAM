@@ -160,13 +160,12 @@ Future removeTableRowByKey(String tableName, String key) async {
 
 Future removeImageFromDB(String key) async {
   await removeTableRowByKey("images", key);
-  await removeTableRowByAttribute("sounds", "imageId", key);
   await removeTableRowByAttribute("categoriesImages", "imageId", key);
 }
 
-void addImageToDB(String name, String path, String categoryId, String soundId) {
+void addImageToDB(String name, String path, String categoryId, String soundId, String pathLearnMore) {
   DatabaseReference imgRef = databaseReference.child("images").push();
-  imgRef.set({"name": name, "path": path, "soundId": soundId});
+  imgRef.set({"name": name, "path": path, "pathLearnMore": pathLearnMore, "soundId": soundId});
   DatabaseReference categoriesImagesRef =
       databaseReference.child("categoriesImages").push();
   categoriesImagesRef.set({"categoryId": categoryId, "imageId": imgRef.key});
@@ -182,5 +181,18 @@ void addMusicToDB(String name, String path) {
   musicRef.set({"name": name, "path": path});
 }
 
+String Coalas = "https://www.youtubekids.com/watch?v=slL3mF4Z2zk";
+String Tartarugas= "https://www.youtubekids.com/watch?v=YIcdMBKMv48";
+String Camaleao= "https://www.youtubekids.com/watch?v=QxUfgZDNLfM";
+String Baleias= "https://www.youtubekids.com/watch?v=MQqLpnnIDFU";
+String Urso= "https://www.youtubekids.com/watch?v=uc5DPPRpQeU";
+String Ratos= "https://www.youtubekids.com/watch?v=MqXzb36kQcc";
+String Macacos= "https://www.youtubekids.com/watch?v=DQR7N97GCD4";
+
+void images() async{
+}
+
+
 void run(){
+  //images();
 }

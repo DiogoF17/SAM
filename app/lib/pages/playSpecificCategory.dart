@@ -67,6 +67,8 @@ class _PlaySpecificCategoryPageState extends State<PlaySpecificCategoryPage> {
     return WillPopScope(
       onWillPop: () async {
         if (widget.mediaController.isFirstMedia()) widget.backgroundMusicController.play();
+        else widget.mediaController.goToPreviousMedia();
+        stopAudio();
         return true;
       },
       child: Scaffold(

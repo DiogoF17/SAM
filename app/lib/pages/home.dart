@@ -7,8 +7,6 @@ import 'package:app/pages/loadingScreen.dart';
 import 'package:app/pages/credits.dart';
 import 'package:app/pages/musics.dart';
 
-import 'package:app/database/database.dart';
-
 import 'package:app/loadAction/loadActionForPlayCategories.dart';
 import 'package:app/loadAction/loadActionForLearnCategories.dart';
 
@@ -20,7 +18,6 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     backgroundMusicController.play();
-    run();
     return Container(
         color: getAppThemeColor(),
         child: Column(

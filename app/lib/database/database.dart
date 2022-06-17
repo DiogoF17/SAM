@@ -180,19 +180,3 @@ void addMusicToDB(String name, String path) {
   DatabaseReference musicRef = databaseReference.child("music").push();
   musicRef.set({"name": name, "path": path});
 }
-
-String Coalas = "https://www.youtubekids.com/watch?v=slL3mF4Z2zk";
-String Tartarugas= "https://www.youtubekids.com/watch?v=YIcdMBKMv48";
-String Camaleao= "https://www.youtubekids.com/watch?v=QxUfgZDNLfM";
-String Baleias= "https://www.youtubekids.com/watch?v=MQqLpnnIDFU";
-String Urso= "https://www.youtubekids.com/watch?v=uc5DPPRpQeU";
-String Ratos= "https://www.youtubekids.com/watch?v=MqXzb36kQcc";
-String Macacos= "https://www.youtubekids.com/watch?v=DQR7N97GCD4";
-
-void images() async{
-}
-
-
-void run(){
-  //images();
-}

@@ -1,18 +1,26 @@
+import 'package:app/database/database.dart';
 import 'package:audioplayers/audioplayers.dart';
 
 import "../database/music.dart";
 
 class BackgroundMusicController {
-  List<Music> musics = [
-    Music("music1", "https://luan.xyz/files/audio/ambient_c_motion.mp3"),
-    Music("music2", "https://luan.xyz/files/audio/nasa_on_a_mission.mp3")
-  ];
+  List<Music> musics = [];
   int currentMusicPlaying = 0;
 
   AudioPlayer audioPlayer = AudioPlayer();
 
   bool isPlaying = false;
   bool musicStarted = false;
+
+  BackgroundMusicController(){
+    loadMusic();
+  }
+
+  void loadMusic () async {
+    musics = await loadMusics();
+    musics.sort((a, b) => a.name.compareTo(b.name));
+    play();
+  }
 
   void play() {
     if (!validMusic(currentMusicPlaying) || isPlaying) return;

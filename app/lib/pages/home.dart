@@ -20,6 +20,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     backgroundMusicController.play();
+    run();
     return Container(
         color: getAppThemeColor(),
         child: Column(

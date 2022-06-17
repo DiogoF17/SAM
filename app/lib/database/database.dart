@@ -1,3 +1,4 @@
+import 'package:app/database/music.dart';
 import 'package:firebase_database/firebase_database.dart';
 import "dart:convert";
 
@@ -105,6 +106,23 @@ Future<List<Sound>> loadSounds(Category category) async {
   return sounds;
 }
 
+Future<List<Music>> loadMusics() async {
+  List<Music> musics = [];
+
+  Map<String, dynamic> JSON = await getAllDataFromTable("music");
+
+  if (JSON.isNotEmpty) {
+    var keys = JSON.keys;
+    for (String key in keys) {
+      if (JSON[key]["name"] != "nd") {
+        musics.add(Music.fromJSON(key, JSON[key]));
+      }
+    }
+  }
+
+  return musics;
+}
+
 Future<Map<String, dynamic>> getAllDataFromTable(String tableName) async {
   DatabaseEvent databaseEvent = await databaseReference.child(tableName).once();
   Map<String, dynamic> JSON = <String, dynamic>{};
@@ -157,4 +175,12 @@ void addImageToDB(String name, String path, String categoryId, String soundId) {
 void addSoundToDB(String name, String path, String categoryId) {
   DatabaseReference soundRef = databaseReference.child("sounds").push();
   soundRef.set({"name": name, "path": path, "categoryId": categoryId});
+}
+
+void addMusicToDB(String name, String path) {
+  DatabaseReference musicRef = databaseReference.child("music").push();
+  musicRef.set({"name": name, "path": path});
+}
+
+void run(){
 }

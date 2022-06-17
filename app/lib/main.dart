@@ -1,7 +1,7 @@
+import 'package:app/utils/backgroundMusicController.dart';
 import 'package:flutter/material.dart';
 import "package:firebase_core/firebase_core.dart";
 import 'pages/home.dart';
-import "utils/backgroundMusicController.dart";
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -10,8 +10,6 @@ Future<void> main() async {
 
 class LittleLearner extends StatelessWidget {
   final Future<FirebaseApp> _fbApp = Firebase.initializeApp();
-  final BackgroundMusicController backgroundMusicController =
-      BackgroundMusicController();
 
   LittleLearner({Key? key}) : super(key: key);
 
@@ -30,7 +28,7 @@ class LittleLearner extends StatelessWidget {
                 print("You have an error! ${snapshot.error.toString()}");
                 return Text("Something went wrong!");
               } else if (snapshot.hasData) {
-                return HomePage(backgroundMusicController);
+                return HomePage(BackgroundMusicController());
               } else {
                 return const Center(child: CircularProgressIndicator());
               }

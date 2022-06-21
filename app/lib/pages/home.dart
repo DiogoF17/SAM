@@ -6,9 +6,11 @@ import "../utils/backgroundMusicController.dart";
 import 'package:app/pages/loadingScreen.dart';
 import 'package:app/pages/credits.dart';
 import 'package:app/pages/musics.dart';
+import 'package:app/pages/instructions.dart';
 
 import 'package:app/loadAction/loadActionForPlayCategories.dart';
 import 'package:app/loadAction/loadActionForLearnCategories.dart';
+
 
 class HomePage extends StatelessWidget {
   final BackgroundMusicController backgroundMusicController;
@@ -26,6 +28,10 @@ class HomePage extends StatelessWidget {
           children: <Widget>[
             getTitle(),
             const SizedBox(height: 40.0),
+            getButton("Instruções", 150.0,
+                action: () => {
+                  nextPage(context, InstructionsPage(backgroundMusicController))
+                }),
             getButton("Jogar", 150.0,
                 action: () => {
                       nextPage(

@@ -39,6 +39,17 @@ Widget getButton(String name, double width, {action}) {
               borderRadius: BorderRadius.circular(buttonRadius))));
 }
 
+Widget getPersonalizedText2(String text,
+    {alignment = TextAlign.center, fontSize = 16.0}) {
+  return Text(text,
+      textAlign: alignment,
+      style: TextStyle(
+          decoration: TextDecoration.none,
+          fontWeight: FontWeight.normal,
+          color: Colors.white,
+          fontSize: fontSize));
+}
+
 Widget getPersonalizedText(String text,
     {alignment = TextAlign.left, fontSize = 18.0}) {
   return Text(text,

@@ -31,7 +31,7 @@ class _LearnCategoriesPageState extends State<LearnCategoriesPage> {
         child: ListView(children: <Widget>[
           Column(children: <Widget>[
             const SizedBox(height: 50.0),
-            getTitle(),
+            getIcon(true),
             const SizedBox(height: 20.0),
             getPersonalizedText("Aprender - Categorias"),
             const SizedBox(height: 30.0)

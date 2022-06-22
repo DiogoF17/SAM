@@ -74,7 +74,7 @@ class _LearnMorePageState extends State<LearnMorePage> {
               onPressed: () {
                 previousPage(context);
               }),
-          getTitle(),
+          getIcon(true),
           IconButton(
               icon: const Icon(Icons.home, color: Colors.white, size: 35.0),
               onPressed: () {

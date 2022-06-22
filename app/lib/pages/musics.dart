@@ -16,7 +16,7 @@ class MusicPage extends StatelessWidget {
 
     List<Widget> body = [
       const SizedBox(height: 100.0),
-      getTitle(),
+      getIcon(true),
       const SizedBox(height: 20.0),
       SizedBox(
           width: MediaQuery.of(context).size.width * 0.8,

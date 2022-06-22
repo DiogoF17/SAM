@@ -26,8 +26,7 @@ class HomePage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            getTitle(),
-            const SizedBox(height: 40.0),
+            getIcon(false),
             getButton("Instruções", 150.0,
                 action: () => {
                   nextPage(context, InstructionsPage(backgroundMusicController))

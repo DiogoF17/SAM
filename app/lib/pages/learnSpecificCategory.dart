@@ -104,8 +104,9 @@ class _LearnSpecificCategoryPageState extends State<LearnSpecificCategoryPage> {
                   borderRadius: BorderRadius.circular(buttonRadius)),
               padding:
                   const EdgeInsets.only(top: 25, bottom: 25, left: 30, right: 30),
-              child: getPersonalizedText("Aprender Mais",
-                  alignment: TextAlign.center)));
+              child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[getPersonalizedText("Aprender Mais", alignment: TextAlign.center)])));
     }
 
     return const SizedBox(height: 0);
@@ -123,12 +124,14 @@ class _LearnSpecificCategoryPageState extends State<LearnSpecificCategoryPage> {
 
   Widget displayMedia() {
     return Container(
-        height: 260,
-        width: 260,
+        constraints: const BoxConstraints(
+          maxHeight: 260.0,
+          maxWidth: 260.0,
+        ),
         child: ClipRRect(
             child: Image.network(
               targetMedia.path,
-              // fit: BoxFit.cover,
+              fit: BoxFit.cover,
               loadingBuilder: (context, child, loadingProgress) {
                 if (loadingProgress == null) return child;
                 return loadingScreen();

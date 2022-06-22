@@ -23,6 +23,24 @@ Widget getTitle() {
           fontSize: 35));
 }
 
+Widget getIcon(bool smaller) {
+  if(smaller){
+    return  Image.asset(
+      'asset/images/icon.png',
+      height: 100,
+      fit: BoxFit.fitWidth,
+    );
+  }
+  else {
+    return  Padding(
+      padding: EdgeInsets.fromLTRB(100, 0, 100, 0),
+      child:  Image.asset(
+          'asset/images/icon.png',
+          fit: BoxFit.fitWidth,
+        ));
+  }
+}
+
 Widget getButton(String name, double width, {action}) {
   return ElevatedButton(
       child: Text(name,
@@ -120,7 +138,7 @@ Widget topBarSpecificCategoriesPage(
   return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
-        getTitle(),
+        getIcon(true),
         IconButton(
             icon: const Icon(Icons.home, color: Colors.white, size: 35.0),
             onPressed: () {

@@ -15,7 +15,7 @@ class InstructionsPage extends StatelessWidget {
         color: getAppThemeColor(),
         child: Column(children: <Widget>[
           const SizedBox(height: 100.0),
-          getTitle(),
+          getIcon(true),
 
           const SizedBox(height: 20.0),
           getPersonalizedText("Instruções"),

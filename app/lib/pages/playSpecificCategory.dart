@@ -106,7 +106,7 @@ class _PlaySpecificCategoryPageState extends State<PlaySpecificCategoryPage> {
           child: ClipRRect(
               child: Image.network(
                 aux.path,
-                // fit: BoxFit.cover,
+                fit: BoxFit.cover,
                 loadingBuilder: (context, child, loadingProgress) {
                   if (loadingProgress == null) return child;
                   return loadingScreen();

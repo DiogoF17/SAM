@@ -26,7 +26,7 @@ Widget getTitle() {
 Widget getIcon(bool smaller) {
   if(smaller){
     return  Image.asset(
-      'asset/images/icon.png',
+      'asset/images/icon2.png',
       height: 100,
       fit: BoxFit.fitWidth,
     );
@@ -35,7 +35,7 @@ Widget getIcon(bool smaller) {
     return  Padding(
       padding: EdgeInsets.fromLTRB(100, 0, 100, 0),
       child:  Image.asset(
-          'asset/images/icon.png',
+          'asset/images/icon2.png',
           fit: BoxFit.fitWidth,
         ));
   }
